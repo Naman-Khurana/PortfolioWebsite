@@ -1,0 +1,113 @@
+import { PortfolioData } from "@/types/portfolio";
+
+export const portfolioData: PortfolioData = {
+  identity: {
+    name: "Naman Khurana",
+    role: "Backend Software Engineer",
+    specialization: "Distributed Systems & Robust API Architecture",
+    coreStack: ["Java", "Spring Boot", "PostgreSQL"],
+    bioShort:
+      "Crafting high-throughput backend services, resilient data pipelines, and scalable architectures.",
+    location: "India",
+  },
+  checkpoints: [
+    { id: "intro", number: "01", title: "Introduction", range: [0.0, 0.45], activeInPhase1: true },
+    { id: "about", number: "02", title: "About Me", range: [0.45, 0.62], activeInPhase1: true },
+    { id: "projects", number: "03", title: "Projects", range: [0.62, 0.77], activeInPhase1: true },
+    { id: "experience", number: "04", title: "Experience", range: [0.77, 0.88], activeInPhase1: true },
+    { id: "engineering", number: "05", title: "Engineering", range: [0.88, 0.95], activeInPhase1: true },
+    { id: "problem-solving", number: "06", title: "Problem Solving", range: [0.95, 0.98], activeInPhase1: false },
+    { id: "connect", number: "07", title: "Connect", range: [0.98, 1.0], activeInPhase1: false },
+  ],
+  projects: [
+    {
+      id: "wealth-tracker",
+      title: "Wealth Tracker",
+      role: "Backend Lead / Architect",
+      tagline: "Backend-focused financial tracking and portfolio analytics platform",
+      description:
+        "High-performance asset tracking system built for granular portfolio computation and transaction auditing.",
+      technologies: ["Java", "Spring Boot", "PostgreSQL", "Redis", "Docker"],
+      metrics: ["Sub-50ms query latency", "ACID compliant ledger"],
+      github: "https://github.com/namankhurana",
+    },
+    {
+      id: "placement-portal",
+      title: "Placement Portal",
+      role: "Full-Stack Engineer",
+      tagline: "Comprehensive recruitment lifecycle & candidate management platform",
+      description:
+        "Engineered role-based access, automated interview scheduling pipelines, and real-time candidate evaluation flows.",
+      technologies: ["Java", "Spring Security", "MySQL", "React", "REST APIs"],
+      metrics: ["Over 2,000+ candidate applications handled"],
+      github: "https://github.com/namankhurana",
+    },
+    {
+      id: "ai-customer-service",
+      title: "AI Customer Service / RAG System",
+      role: "AI & Backend Engineer",
+      tagline: "Enterprise contextual retrieval-augmented generation engine",
+      description:
+        "Vector search engine integrated with customer support workflows to autonomously resolve complex queries with verified grounding.",
+      technologies: ["Python", "FastAPI", "PostgreSQL pgvector", "LangChain", "Docker"],
+      metrics: ["70% reduction in first-response escalation time"],
+      github: "https://github.com/namankhurana",
+    },
+  ],
+  experience: [
+    {
+      company: "Onelap Telematics",
+      role: "Software Engineering Intern / Backend Engineer",
+      period: "2023 - Present",
+      description: [
+        "Architected scalable telematics telemetry processors handling continuous GPS data streams.",
+        "Implemented trip and stoppage detection algorithms with robust spatial indexing.",
+        "Integrated AI/RAG customer workflow automation reducing support response times.",
+      ],
+      technologies: ["Java", "Spring Boot", "PostgreSQL", "Redis", "REST APIs"],
+      keyHighlight: "Optimized geospatial query processing on millions of GPS coordinates.",
+    },
+  ],
+  skills: [
+    {
+      category: "Backend & Systems",
+      items: ["Java", "Spring Boot", "Spring Security", "RESTful APIs", "Microservices Architecture"],
+    },
+    {
+      category: "Databases & Caching",
+      items: ["PostgreSQL", "MySQL", "Redis", "JPA / Hibernate", "Database Optimization"],
+    },
+    {
+      category: "DevOps & Infrastructure",
+      items: ["Docker", "Git", "CI/CD Pipelines", "Linux", "Nginx"],
+    },
+    {
+      category: "Methodologies & Concepts",
+      items: ["Data Structures & Algorithms", "System Design", "RAG & Vector Search", "Clean Architecture"],
+    },
+  ],
+  codingProfiles: [
+    {
+      platform: "LeetCode",
+      handle: "namankhurana",
+      url: "https://leetcode.com",
+    },
+    {
+      platform: "Codeforces",
+      handle: "namankhurana",
+      url: "https://codeforces.com",
+    },
+    {
+      platform: "AlgoZenith",
+      handle: "namankhurana",
+      url: "https://algozenith.com",
+    },
+  ],
+  contact: {
+    email: "khurananaman02@gmail.com",
+    github: "https://github.com/namankhurana",
+    linkedin: "https://linkedin.com/in/namankhurana",
+    resumeUrl: "/resume.pdf",
+    tagline: "Let's build something amazing.",
+  },
+};
