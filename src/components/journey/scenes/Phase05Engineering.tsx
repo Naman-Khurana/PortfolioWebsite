@@ -241,10 +241,7 @@ export const Phase05Engineering: React.FC = () => {
                   CORE CAPABILITY
                 </span>
                 <p className="text-xs text-white/80 leading-relaxed font-sans">
-                  {activeTier === 0 && "Relational schema normalization, high-frequency caching, geospatial indexing, and ACID transaction auditing."}
-                  {activeTier === 1 && "Decoupled REST microservices, asynchronous message queues, high-throughput RPC endpoints, and secure auth layers."}
-                  {activeTier === 2 && "Containerized application lifecycle, multi-stage Docker builds, reproducible CI/CD pipelines, and reverse proxies."}
-                  {activeTier === 3 && "Granular computational efficiency, vector similarity search, modular domain design, and resilient failure isolation."}
+                  {portfolioData.skills[activeTier]?.capability}
                 </p>
               </div>
 
@@ -253,10 +250,7 @@ export const Phase05Engineering: React.FC = () => {
                   TECHNICAL METRIC
                 </span>
                 <p className="text-xs text-white/80 leading-relaxed font-sans">
-                  {activeTier === 0 && "Sub-50ms query latency on complex analytical joins with connection pooling optimization."}
-                  {activeTier === 1 && "Concurrent request handling with thread-safe execution and resilient backpressure."}
-                  {activeTier === 2 && "Zero-downtime deployment workflows with immutable container tagging and Linux hardening."}
-                  {activeTier === 3 && "Context-aware vector embeddings with optimized cosine similarity indexing."}
+                  {portfolioData.skills[activeTier]?.metric}
                 </p>
               </div>
             </div>
@@ -378,4 +372,3 @@ export const Phase05Engineering: React.FC = () => {
     </motion.div>
   );
 };
-

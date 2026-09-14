@@ -413,7 +413,7 @@ export const Phase06ProblemSolving: React.FC = () => {
               <span className="text-amber-400">ENGINEER MINDSET</span>
             </div>
             <p className="text-[11px] text-white/80 font-sans leading-relaxed">
-              &quot;Decompose high-dimension complexity into atomic subproblems. Rigorously optimize invariant bounds ($O(N \log N)$ / $O(V+E)$), stress-test edge conditions, and enforce deterministic correctness.&quot;
+              &quot;{problemData?.philosophy}&quot;
             </p>
           </div>
 

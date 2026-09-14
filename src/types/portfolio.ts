@@ -6,6 +6,14 @@ export interface ProjectItem {
   description: string;
   technologies: string[];
   metrics?: string[];
+  focus: string;
+  reliability: string;
+  topology: {
+    title: string;
+    sourceLabel: string;
+    statusLabel: string;
+    details: [string, string, string, string];
+  };
   link?: string;
   github?: string;
 }
@@ -52,6 +60,7 @@ export interface ContactInfo {
   linkedin: string;
   resumeUrl: string;
   tagline: string;
+  introduction: string;
 }
 
 export interface PortfolioData {
@@ -62,6 +71,11 @@ export interface PortfolioData {
     coreStack: string[];
     bioShort: string;
     location: string;
+    aboutNodes: {
+      eyebrow: string;
+      title: string;
+      description: string;
+    }[];
   };
   checkpoints: {
     id: string;
@@ -75,8 +89,10 @@ export interface PortfolioData {
   skills: {
     category: string;
     items: string[];
+    capability: string;
+    metric: string;
   }[];
   codingProfiles: CodingProfile[];
-  problemSolving?: ProblemSolvingData;
+  problemSolving?: ProblemSolvingData & { philosophy: string };
   contact: ContactInfo;
 }

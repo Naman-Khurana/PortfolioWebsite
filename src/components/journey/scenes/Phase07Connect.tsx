@@ -7,8 +7,9 @@
  * Concept: "The Spatial Pull-Back & Horizon // Release"
  *
  * Contact content is data-driven from portfolioData.contact.
- * Layout: content sits in the left open area of 05-outro.png, shifted right
- * of the fixed side navigation (which occupies ~192px on the left edge).
+ * Layout: content sits in the left open area of 05-outro.png. The chapter
+ * navigation is a slim rail, so the contact composition can use this space
+ * without an artificial left gutter.
  */
 
 import React, { useState } from "react";
@@ -54,7 +55,6 @@ export const Phase07Connect: React.FC = () => {
       }
     >
       {/*
-        Padding left accounts for the side navigation (~160-200px wide on desktop).
         Content is constrained to the LEFT half of the image (character is on the right).
         We use absolute positioning so it doesn't affect the image layer.
       */}
@@ -62,7 +62,7 @@ export const Phase07Connect: React.FC = () => {
         <div
           className="
             flex flex-col gap-5 pointer-events-auto
-            ml-44 sm:ml-52 md:ml-56 lg:ml-60
+            ml-12 sm:ml-16 md:ml-20 lg:ml-24
             mr-auto
             max-w-[420px] sm:max-w-[460px] md:max-w-[500px]
             px-0
@@ -90,7 +90,7 @@ export const Phase07Connect: React.FC = () => {
               {contact.tagline}
             </h2>
             <p className="text-xs sm:text-sm text-white/75 leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
-              Architecting high-throughput backends, scalable APIs, and distributed systems. Let&apos;s build together.
+              {contact.introduction}
             </p>
           </div>
 

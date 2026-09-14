@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, useTransform } from "motion/react";
 import { useTimeline } from "@/context/TimelineContext";
+import { portfolioData } from "@/data/portfolio";
 
 interface Props {
   // These values are driven by parent TheWalkTransition to stay in sync with
@@ -64,8 +65,8 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
   // Gateway node pulse indicator animation on approach
   const gatewayBorderGlow = useTransform(
     scrollProgress,
-    [0.50, 0.57],
-    [0.5, 1.0]
+    [0.50, 0.57, 0.62],
+    [0.5, 1.0, 0]
   );
 
   return (
@@ -112,16 +113,16 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
 
         {/* -------- SATELLITE NODE 01: HIGH-THROUGHPUT SYSTEMS -------- */}
         <motion.div
-          className="absolute top-[20%] left-[6%] sm:left-[10%] md:left-[12%] max-w-[280px] sm:max-w-[300px] pointer-events-none"
+          className="absolute top-[20%] left-[16%] sm:left-[18%] md:left-[19%] max-w-[280px] sm:max-w-[300px] pointer-events-none"
           style={{ opacity: satelliteOpacity }}
         >
           <div className="p-4 rounded-xl bg-black/70 border border-sky-500/25 backdrop-blur-sm">
             <span className="font-mono text-[10px] text-sky-400 tracking-wider uppercase font-semibold block mb-1">
-              NODE // 01 · SYSTEMS
+              {portfolioData.identity.aboutNodes[0].eyebrow}
             </span>
-            <h3 className="text-sm font-semibold text-white mb-1">High-Throughput Core</h3>
+            <h3 className="text-sm font-semibold text-white mb-1">{portfolioData.identity.aboutNodes[0].title}</h3>
             <p className="text-[11px] text-white/60 leading-relaxed">
-              Low-latency services, spatial telemetry pipelines, and ACID-compliant transactional backends in Java & Spring Boot.
+              {portfolioData.identity.aboutNodes[0].description}
             </p>
           </div>
         </motion.div>
@@ -133,11 +134,11 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
         >
           <div className="p-4 rounded-xl bg-black/70 border border-amber-500/25 backdrop-blur-sm">
             <span className="font-mono text-[10px] text-amber-400 tracking-wider uppercase font-semibold block mb-1">
-              NODE // 02 · ARCHITECTURE
+              {portfolioData.identity.aboutNodes[1].eyebrow}
             </span>
-            <h3 className="text-sm font-semibold text-white mb-1">Simplifying Complexity</h3>
+            <h3 className="text-sm font-semibold text-white mb-1">{portfolioData.identity.aboutNodes[1].title}</h3>
             <p className="text-[11px] text-white/60 leading-relaxed">
-              Decomposing distributed friction into modular microservices with strict separation of concerns and robust indexing.
+              {portfolioData.identity.aboutNodes[1].description}
             </p>
           </div>
         </motion.div>
@@ -149,11 +150,11 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
         >
           <div className="p-4 rounded-xl bg-black/70 border border-emerald-500/25 backdrop-blur-sm">
             <span className="font-mono text-[10px] text-emerald-400 tracking-wider uppercase font-semibold block mb-1">
-              NODE // 03 · AI & PIPELINES
+              {portfolioData.identity.aboutNodes[2].eyebrow}
             </span>
-            <h3 className="text-sm font-semibold text-white mb-1">Grounding & Vector Retrieval</h3>
+            <h3 className="text-sm font-semibold text-white mb-1">{portfolioData.identity.aboutNodes[2].title}</h3>
             <p className="text-[11px] text-white/60 leading-relaxed">
-              Integrating RAG pipelines and pgvector search with verified grounding to automate enterprise workflows.
+              {portfolioData.identity.aboutNodes[2].description}
             </p>
           </div>
         </motion.div>

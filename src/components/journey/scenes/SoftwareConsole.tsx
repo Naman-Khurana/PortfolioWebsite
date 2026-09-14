@@ -387,9 +387,7 @@ export const SoftwareConsole: React.FC = () => {
                           ENGINEERING FOCUS
                         </span>
                         <span className="text-xs text-white/75 leading-relaxed">
-                          {selectedProjectId === "wealth-tracker" && "High-concurrency data models, transaction isolation, and modular REST microservices."}
-                          {selectedProjectId === "placement-portal" && "Role-based access security, candidate state machines, and evaluation pipelines."}
-                          {selectedProjectId === "ai-customer-service" && "Dense vector similarity search, context grounding, and low-latency inference dispatch."}
+                          {activeProject.focus}
                         </span>
                       </div>
                       <div className="p-3 rounded-xl bg-white/[0.025] border border-white/5">
@@ -397,9 +395,7 @@ export const SoftwareConsole: React.FC = () => {
                           RELIABILITY CONTRACT
                         </span>
                         <span className="text-xs text-white/75 leading-relaxed">
-                          {selectedProjectId === "wealth-tracker" && "Resilient error propagation, query indexing, and verifiable ledger contracts."}
-                          {selectedProjectId === "placement-portal" && "Transactional consistency during high-volume interview schedule dispatches."}
-                          {selectedProjectId === "ai-customer-service" && "Anti-hallucination verification boundaries and source chunk citation grounding."}
+                          {activeProject.reliability}
                         </span>
                       </div>
                     </div>
@@ -447,9 +443,7 @@ export const SoftwareConsole: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping" />
                       <span className="font-mono text-[11px] text-sky-300 font-semibold tracking-wider">
-                        {selectedProjectId === "wealth-tracker" && "TOPOLOGY // ACID FINANCIAL LEDGER"}
-                        {selectedProjectId === "placement-portal" && "TOPOLOGY // RECRUITMENT PIPELINE"}
-                        {selectedProjectId === "ai-customer-service" && "TOPOLOGY // VECTOR RAG ENGINE"}
+                        TOPOLOGY // {activeProject.topology.title}
                       </span>
                     </div>
                     <span className="font-mono text-[9px] px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">
@@ -504,14 +498,10 @@ export const SoftwareConsole: React.FC = () => {
 
                     {/* Overlay labels */}
                     <div className="absolute top-2 left-2 font-mono text-[9px] text-white/50 bg-black/60 px-1.5 py-0.5 rounded border border-white/5">
-                      {selectedProjectId === "wealth-tracker" && "LEDGER_ENGINE // SERIALIZABLE"}
-                      {selectedProjectId === "placement-portal" && "AUTH_RBAC // SPRING_SECURITY"}
-                      {selectedProjectId === "ai-customer-service" && "PGVECTOR // COSINE_SIMILARITY"}
+                      {activeProject.topology.sourceLabel}
                     </div>
                     <div className="absolute bottom-2 right-2 font-mono text-[9px] text-sky-400 bg-black/60 px-1.5 py-0.5 rounded border border-sky-500/20">
-                      {selectedProjectId === "wealth-tracker" && "AUDIT_TRAIL: ACTIVE"}
-                      {selectedProjectId === "placement-portal" && "PIPELINE: REAL-TIME"}
-                      {selectedProjectId === "ai-customer-service" && "GROUNDED: VERIFIED"}
+                      {activeProject.topology.statusLabel}
                     </div>
                   </div>
 
@@ -520,30 +510,24 @@ export const SoftwareConsole: React.FC = () => {
                     <div className="p-2 rounded bg-white/[0.02] border border-white/5 font-mono">
                       <span className="text-[9px] text-white/40 block">LATENCY PROFILE</span>
                       <span className="text-xs font-semibold text-sky-300">
-                        {selectedProjectId === "wealth-tracker" && "Sub-50ms Query"}
-                        {selectedProjectId === "placement-portal" && "<30ms REST API"}
-                        {selectedProjectId === "ai-customer-service" && "<120ms Vector Search"}
+                        {activeProject.topology.details[0]}
                       </span>
                     </div>
                     <div className="p-2 rounded bg-white/[0.02] border border-white/5 font-mono">
                       <span className="text-[9px] text-white/40 block">STORAGE ENGINE</span>
                       <span className="text-xs font-semibold text-emerald-400">
-                        {selectedProjectId === "wealth-tracker" && "PostgreSQL + Redis"}
-                        {selectedProjectId === "placement-portal" && "MySQL Enterprise"}
-                        {selectedProjectId === "ai-customer-service" && "pgvector Embeddings"}
+                        {activeProject.topology.details[1]}
                       </span>
                     </div>
                     <div className="p-2 rounded bg-white/[0.02] border border-white/5 font-mono">
                       <span className="text-[9px] text-white/40 block">SYSTEM ISOLATION</span>
                       <span className="text-xs font-semibold text-amber-400">
-                        {selectedProjectId === "wealth-tracker" && "ACID Ledger Compliant"}
-                        {selectedProjectId === "placement-portal" && "Role-Based Token Auth"}
-                        {selectedProjectId === "ai-customer-service" && "Context-Bound Citations"}
+                        {activeProject.topology.details[2]}
                       </span>
                     </div>
                     <div className="p-2 rounded bg-white/[0.02] border border-white/5 font-mono">
                       <span className="text-[9px] text-white/40 block">CONTAINERIZATION</span>
-                      <span className="text-xs font-semibold text-white">Dockerized Lifecycle</span>
+                      <span className="text-xs font-semibold text-white">{activeProject.topology.details[3]}</span>
                     </div>
                   </div>
 
