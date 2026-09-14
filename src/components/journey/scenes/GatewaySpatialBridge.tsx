@@ -11,6 +11,10 @@
  *
  * All transforms are scroll-linked via useTransform — perfectly reversible
  * by scrolling backward, with zero layout thrashing (no width/height animation).
+ *
+ * CRITICAL: When currentProgress >= 0.960, the component returns null so the
+ * clip-path + box-shadow compositing layer is REMOVED from the DOM entirely,
+ * preventing any bleed-through into Phase 07.
  */
 
 import React from "react";
@@ -18,18 +22,19 @@ import { motion, useTransform } from "motion/react";
 import { useTimeline } from "@/context/TimelineContext";
 import { SoftwareConsole } from "@/components/journey/scenes/SoftwareConsole";
 import { Phase05Engineering } from "@/components/journey/scenes/Phase05Engineering";
+import { Phase06ProblemSolving } from "@/components/journey/scenes/Phase06ProblemSolving";
 
 export const GatewaySpatialBridge: React.FC = () => {
-  const { scrollProgress, prefersReducedMotion } = useTimeline();
+  const { scrollProgress, prefersReducedMotion, currentProgress } = useTimeline();
 
   // ----------------------------------------------------------------
   // OUTER VISIBILITY — container fades in as camera dives toward wall
   // and stays persistent across Phase 03 (Projects), Phase 04 (Experience),
-  // and Phase 05 (Engineering).
+  // Phase 05 (Engineering), and Phase 06 (Problem Solving).
   // ----------------------------------------------------------------
   const outerOpacity = useTransform(
     scrollProgress,
-    [0.54, 0.58, 0.94, 0.97],
+    [0.54, 0.58, 0.950, 0.965],
     [0, 1, 1, 0]
   );
 
@@ -66,22 +71,29 @@ export const GatewaySpatialBridge: React.FC = () => {
   // ----------------------------------------------------------------
   // DARK BACKGROUND SURFACE OPACITY
   // Solid opaque (0.97) from 0.62 through 0.865, then dissolves to glass (0.35)
-  // for Phase 05 Engineering (0.895 - 0.940).
+  // for Phase 05 Engineering & Phase 06 Problem Solving (0.895 - 0.950).
   // ----------------------------------------------------------------
   const darkBgOpacity = useTransform(
     scrollProgress,
-    [0.54, 0.60, 0.865, 0.895, 0.945, 0.970],
+    [0.54, 0.60, 0.865, 0.895, 0.950, 0.965],
     [0, 0.97, 0.97, 0.35, 0.35, 0]
   );
 
   // ----------------------------------------------------------------
-  // BORDER GLOW — peaks during approach, fades to resting state
+  // BORDER GLOW — peaks during approach, fully gone by 0.920
   // ----------------------------------------------------------------
   const borderOpacity = useTransform(
     scrollProgress,
-    [0.54, 0.60, 0.70, 0.865, 0.895],
-    [0, 0.7, 0.3, 0.15, 0.25]
+    [0.54, 0.60, 0.70, 0.865, 0.895, 0.920],
+    [0, 0.7, 0.3, 0.15, 0.25, 0]
   );
+
+  // ----------------------------------------------------------------
+  // HARD UNMOUNT: Remove from DOM entirely once Phase 07 begins.
+  // Opacity-0 alone is insufficient — the clipPath compositing layer
+  // still produces visible GPU artifacts (the "blue box") at story 0.97+.
+  // ----------------------------------------------------------------
+  if (currentProgress >= 0.965) return null;
 
   return (
     <motion.div
@@ -130,6 +142,11 @@ export const GatewaySpatialBridge: React.FC = () => {
             {/* Phase 05 Engineering Topology HUD */}
             <div className="absolute inset-0 pointer-events-none">
               <Phase05Engineering />
+            </div>
+
+            {/* Phase 06 Problem Solving & Algorithmic Graph HUD */}
+            <div className="absolute inset-0 pointer-events-none">
+              <Phase06ProblemSolving />
             </div>
           </div>
         </motion.div>

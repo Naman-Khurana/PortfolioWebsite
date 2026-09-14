@@ -26,6 +26,26 @@ export interface CodingProfile {
   stats?: string;
 }
 
+export interface ProblemSolvingMetric {
+  label: string;
+  value: string;
+}
+
+export interface ProblemSolvingPlatform {
+  id: string;
+  name: string;
+  handle: string;
+  url: string;
+  badge?: string;
+  statusText?: string;
+  metrics?: ProblemSolvingMetric[];
+}
+
+export interface ProblemSolvingData {
+  topics: string[];
+  platforms: ProblemSolvingPlatform[];
+}
+
 export interface ContactInfo {
   email: string;
   github: string;
@@ -57,5 +77,6 @@ export interface PortfolioData {
     items: string[];
   }[];
   codingProfiles: CodingProfile[];
+  problemSolving?: ProblemSolvingData;
   contact: ContactInfo;
 }

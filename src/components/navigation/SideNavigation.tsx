@@ -8,7 +8,7 @@ import { useTimeline } from "@/context/TimelineContext";
 export const SideNavigation: React.FC = () => {
   const { currentProgress, activeCheckpointIndex, scrollToProgress, prefersReducedMotion } = useTimeline();
 
-  const isWorkspaceActive = currentProgress >= 0.58 && currentProgress <= 0.96;
+  const isWorkspaceActive = currentProgress >= 0.58 && currentProgress <= 0.985;
 
   return (
     <nav

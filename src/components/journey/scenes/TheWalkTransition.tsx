@@ -7,6 +7,7 @@ import { useTimeline } from "@/context/TimelineContext";
 import { HeroOverlay } from "@/components/journey/HeroOverlay";
 import { Phase02AboutWall } from "@/components/journey/scenes/Phase02AboutWall";
 import { GatewaySpatialBridge } from "@/components/journey/scenes/GatewaySpatialBridge";
+import { Phase07Connect } from "@/components/journey/scenes/Phase07Connect";
 
 export const TheWalkTransition: React.FC = () => {
   const { scrollProgress, prefersReducedMotion, currentProgress } = useTimeline();
@@ -28,10 +29,14 @@ export const TheWalkTransition: React.FC = () => {
   // - 0.625 - 0.865: Software Workspace (Projects & Experience) — 100% CENTERED & ROCK-SOLID READING WINDOW
   // - 0.865 - 0.895: Gentle camera pull-back as console turns to glass, framing engineer and System Matrix HUD (scale 1.0 -> 0.95, y 0% -> -1.5%)
   // - 0.895 - 0.940: Phase 05 Engineering stable reading focus
+  // - 0.940 - 0.960: Phase 06 Problem Solving stable reading state
+  // - 0.960 - 0.976: Phase 06 → 07 RELEASE: subtle camera push-in
+  // - 0.976 - 0.985: Frame 05 arrives, camera settles to 1.0
+  // - 0.985 - 1.000: Phase 07 Connect stable reading plateau
   const cameraScale = useTransform(
     scrollProgress,
-    [0.0, 0.14, 0.2, 0.24, 0.32, 0.4, 0.45, 0.58, 0.62, 0.625, 0.865, 0.895, 0.940, 1.0],
-    [1.05, 1.05, 1.0, 1.0, 1.02, 1.12, 1.04, 1.04, 1.8, 1.0, 1.0, 0.95, 0.95, 1.0]
+    [0.0, 0.14, 0.2, 0.24, 0.32, 0.4, 0.45, 0.58, 0.62, 0.625, 0.865, 0.895, 0.940, 0.960, 0.976, 0.985, 1.0],
+    [1.05, 1.05, 1.0, 1.0, 1.02, 1.12, 1.04, 1.04, 1.8, 1.0, 1.0, 0.95, 0.95, 1.05, 1.02, 1.0, 1.0]
   );
 
   const cameraX = useTransform(
@@ -42,8 +47,8 @@ export const TheWalkTransition: React.FC = () => {
 
   const cameraY = useTransform(
     scrollProgress,
-    [0.0, 0.14, 0.2, 0.24, 0.32, 0.4, 0.45, 0.58, 0.62, 0.625, 0.865, 0.895, 0.940, 1.0],
-    ["1.5%", "1.5%", "0%", "0%", "-0.5%", "0%", "0%", "0%", "-8%", "0%", "0%", "-1.5%", "-1.5%", "0%"]
+    [0.0, 0.14, 0.2, 0.24, 0.32, 0.4, 0.45, 0.58, 0.62, 0.625, 0.865, 0.895, 0.940, 0.960, 0.976, 0.985, 1.0],
+    ["1.5%", "1.5%", "0%", "0%", "-0.5%", "0%", "0%", "0%", "-8%", "0%", "0%", "-1.5%", "-1.5%", "-3%", "0%", "0%", "0%"]
   );
 
   // --------------------------------------------------------------------------
@@ -102,11 +107,18 @@ export const TheWalkTransition: React.FC = () => {
     ["3%", "-3%"]
   );
 
-  // Frame 04: At Wall (Expands from the wall & protagonist as camera pushes in; stays visible through Phase 05 as glass HUD overlay reveals him)
+  // Frame 04: At Wall — fades out during the zoom-through transition
   const opacity04 = useTransform(
     scrollProgress,
-    [0.0, 0.33, 0.38, 0.58, 0.63, 0.865, 0.895, 0.945, 1.0],
-    [0, 0, 1, 1, 0.5, 0.5, 1, 1, 0]
+    [0.0, 0.33, 0.38, 0.58, 0.63, 0.865, 0.895, 0.945, 0.960, 0.976, 1.0],
+    [0, 0, 1, 1, 0.5, 0.5, 1, 1, 1, 0, 0]
+  );
+
+  // Frame 05: Sunset Horizon — fades in right as the zoom peaks and Frame04 is gone
+  const opacity05 = useTransform(
+    scrollProgress,
+    [0.0, 0.968, 0.980, 1.0],
+    [0, 0, 1, 1]
   );
   const mask04Spread = useTransform(
     scrollProgress,
@@ -130,11 +142,11 @@ export const TheWalkTransition: React.FC = () => {
   );
 
   // --------------------------------------------------------------------------
-  // 3. TRANSIENT MOTION BLUR (Restrained, active strictly during peak velocities)
+  // 3. TRANSIENT MOTION BLUR (subtle burst during 06→07 crossover)
   // --------------------------------------------------------------------------
   const blurFilter = useTransform(
     scrollProgress,
-    [0.0, 0.255, 0.275, 0.295, 0.345, 0.365, 0.385, 0.58, 0.61, 0.64, 1.0],
+    [0.0, 0.255, 0.275, 0.295, 0.345, 0.365, 0.385, 0.58, 0.61, 0.64, 0.960, 0.968, 0.976, 1.0],
     [
       "blur(0px)",
       "blur(0px)",
@@ -146,6 +158,9 @@ export const TheWalkTransition: React.FC = () => {
       "blur(0px)",
       "blur(3.0px)",
       "blur(0px)",
+      "blur(0px)",
+      "blur(2px)",   // subtle blur as scene transitions
+      "blur(0px)",   // clears as Frame 05 settles in
       "blur(0px)",
     ]
   );
@@ -254,6 +269,21 @@ export const TheWalkTransition: React.FC = () => {
           />
         </motion.div>
 
+        {/* ----------------- FRAME 05: SUNSET HORIZON / CONNECT (Final calm resolution) ----------------- */}
+        <motion.div
+          className="absolute inset-0 w-full h-full"
+          style={{ opacity: opacity05 }}
+        >
+          <Image
+            src="/assets/journey/05-outro.png"
+            alt="Naman Khurana standing at the window overlooking the city at sunset"
+            fill
+            priority={false}
+            sizes="100vw"
+            className="object-cover object-center pointer-events-none select-none"
+          />
+        </motion.div>
+
         {/* ----------------- AMBIENT LIGHTING OVERLAYS ----------------- */}
 
         {/* Desk Laptop Glow (Active during Phase 1, fades as character leaves desk) */}
@@ -279,8 +309,11 @@ export const TheWalkTransition: React.FC = () => {
       {/* Phase 02: About Wall Blueprint Overlay with Gateway Node */}
       <Phase02AboutWall isTransitioning={isTransitioning} />
 
-      {/* Gateway Spatial Bridge: morphs Gateway Node → Projects Workspace (Active 0.54 -> 0.83) */}
+      {/* Gateway Spatial Bridge: morphs Gateway Node → Projects Workspace (Active 0.54 -> 0.98) */}
       <GatewaySpatialBridge />
+
+      {/* Phase 07 Connect: final contact overlay over the sunset horizon (Active 0.980 -> 1.00) */}
+      <Phase07Connect />
     </motion.div>
   );
 };

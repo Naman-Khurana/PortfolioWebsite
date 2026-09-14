@@ -15,9 +15,9 @@ export const portfolioData: PortfolioData = {
     { id: "about", number: "02", title: "About Me", range: [0.45, 0.62], activeInPhase1: true },
     { id: "projects", number: "03", title: "Projects", range: [0.62, 0.77], activeInPhase1: true },
     { id: "experience", number: "04", title: "Experience", range: [0.77, 0.88], activeInPhase1: true },
-    { id: "engineering", number: "05", title: "Engineering", range: [0.88, 0.95], activeInPhase1: true },
-    { id: "problem-solving", number: "06", title: "Problem Solving", range: [0.95, 0.98], activeInPhase1: false },
-    { id: "connect", number: "07", title: "Connect", range: [0.98, 1.0], activeInPhase1: false },
+    { id: "engineering", number: "05", title: "Engineering", range: [0.88, 0.94], activeInPhase1: true },
+    { id: "problem-solving", number: "06", title: "Problem Solving", range: [0.94, 0.98], activeInPhase1: true },
+    { id: "connect", number: "07", title: "Connect", range: [0.98, 1.0], activeInPhase1: true },
   ],
   projects: [
     {
@@ -103,6 +103,44 @@ export const portfolioData: PortfolioData = {
       url: "https://algozenith.com",
     },
   ],
+  problemSolving: {
+    topics: [
+      "Dynamic Programming",
+      "Graph Theory & Trees",
+      "Advanced Data Structures",
+      "Algorithmic Complexity & Optimization",
+      "System Design & Scalability",
+    ],
+    platforms: [
+      {
+        id: "leetcode",
+        name: "LeetCode",
+        handle: "namankhurana",
+        url: "https://leetcode.com",
+        badge: "DSA & CONCURRENCY",
+        statusText: "Algorithmic Pattern Mastery",
+        metrics: [],
+      },
+      {
+        id: "codeforces",
+        name: "Codeforces",
+        handle: "namankhurana",
+        url: "https://codeforces.com",
+        badge: "COMPETITIVE PROGRAMMING",
+        statusText: "Time-Constrained Problem Solving",
+        metrics: [],
+      },
+      {
+        id: "algozenith",
+        name: "AlgoZenith / MAANG",
+        handle: "namankhurana",
+        url: "https://algozenith.com",
+        badge: "ADVANCED DSA BOOTCAMP",
+        statusText: "Rigorous Interview Preparation",
+        metrics: [],
+      },
+    ],
+  },
   contact: {
     email: "khurananaman02@gmail.com",
     github: "https://github.com/namankhurana",

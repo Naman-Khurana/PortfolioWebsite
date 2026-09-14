@@ -28,7 +28,8 @@ const TimelineContext = createContext<TimelineContextType | null>(null);
  * Reading plateaus:
  *   Phase 03 Projects   raw 0.62 → 0.72 maps to story 0.64 → 0.65  (10% raw = 1% story)
  *   Phase 04 Experience raw 0.77 → 0.85 maps to story 0.78 → 0.79  (8%  raw = 1% story)
- *   Phase 05 Engineering raw 0.895 → 0.93 maps to story 0.90 → 0.905
+ *   Phase 05 Engineering raw 0.895 → 0.925 maps to story 0.895 → 0.910
+ *   Phase 06 Problem Solving raw 0.940 → 0.975 maps to story 0.950 → 0.965 (3.5% raw = 1.5% story)
  *
  * Outside plateaus the mapping is roughly linear (story advances normally).
  *
@@ -43,8 +44,11 @@ const RAW_INPUTS = [
   0.85,  // End of Experience reading plateau
   0.865, // 04→05 crossover begins
   0.895, // Engineering stable begins — begin plateau
-  0.93,  // End of Engineering reading plateau
-  1.00,
+  0.925, // End of Engineering reading plateau
+  0.940, // Problem Solving reveal begins
+  0.970, // End of Problem Solving reading plateau
+  0.982, // Phase 06→07 crossover completes
+  1.00,  // End of Phase 07 Connect reading plateau
 ] as const;
 
 const STORY_OUTPUTS = [
@@ -56,8 +60,11 @@ const STORY_OUTPUTS = [
   0.795, // plateau: 8% raw → 0.025 story progress (reading window)
   0.865, // fast advance through 04→05 crossover
   0.895, // story matches raw at Engineering start
-  0.91,  // plateau: 3.5% raw → 0.015 story progress (reading window)
-  1.00,
+  0.910, // plateau: 3% raw → 0.015 story progress (reading window)
+  0.945, // fast advance through 05→06 crossover
+  0.965, // plateau: 3% raw → 0.020 story progress (reading window)
+  0.985, // fast advance through 06→07 crossover
+  1.00,  // Connect reading plateau (story 0.985 -> 1.00)
 ] as const;
 
 export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

@@ -29,18 +29,18 @@ export const Phase05Engineering: React.FC = () => {
   // ================================================================
   // TIMING & READING WINDOW PLATEAUS
   // Entrance: 0.875 -> 0.895
-  // Stable Reading Window: 0.895 -> 0.940 (Nothing moves or jitters)
-  // Exit Transition: 0.940 -> 0.965
+  // Stable Reading Window: 0.895 -> 0.925 (Nothing moves or jitters)
+  // Exit Transition: 0.925 -> 0.945
   // ================================================================
   const containerOpacity = useTransform(
     scrollProgress,
-    [0.875, 0.895, 0.940, 0.965],
+    [0.875, 0.895, 0.925, 0.945],
     [0, 1, 1, 0]
   );
 
   const containerY = useTransform(
     scrollProgress,
-    [0.875, 0.895, 0.940, 0.965],
+    [0.875, 0.895, 0.925, 0.945],
     ["16px", "0px", "0px", "-16px"]
   );
 
@@ -99,7 +99,7 @@ export const Phase05Engineering: React.FC = () => {
   ];
 
   const currentTheme = tierThemes[activeTier] || tierThemes[0];
-  const isInteractive = currentProgress >= 0.88 && currentProgress < 0.96;
+  const isInteractive = currentProgress >= 0.88 && currentProgress < 0.935;
 
   return (
     <motion.div
