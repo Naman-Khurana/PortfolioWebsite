@@ -67,10 +67,12 @@ export interface PortfolioData {
   identity: {
     name: string;
     role: string;
+    category: string;
     specialization: string;
     coreStack: string[];
     bioShort: string;
     location: string;
+    aboutSubtitle: string;
     aboutNodes: {
       eyebrow: string;
       title: string;

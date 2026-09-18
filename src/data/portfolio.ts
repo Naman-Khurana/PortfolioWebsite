@@ -1,32 +1,56 @@
 import { PortfolioData } from "@/types/portfolio";
 
 export const portfolioData: PortfolioData = {
+  // ================================================================
+  // SECTION: Phase01 Hero + Phase02AboutWall ("About Me" satellite nodes)
+  // - name/role/coreStack/bioShort/location -> Phase01 hero intro
+  // - aboutNodes[]      -> the satellite boxes around the gateway node.
+  //                        Any number of entries works (Phase02AboutWall
+  //                        auto-positions them on a circle and cycles
+  //                        colors) — just add/remove entries here.
+  // - aboutSubtitle     -> optional. Text under the "System Philosophy ·
+  //                        Architecture Wall" header. Falls back to
+  //                        bioShort if omitted.
+  // ================================================================
   identity: {
     name: "Naman Khurana",
-    role: "Backend Software Engineer",
+    role: "Software Engineer",
+    category: "SOFTWARE & SYSTEMS",
     specialization: "Distributed Systems & Robust API Architecture",
     coreStack: ["Java", "Spring Boot", "PostgreSQL"],
     bioShort:
-      "Crafting high-throughput backend services, resilient data pipelines, and scalable architectures.",
+      "A backend-focused software engineer who enjoys building reliable systems, APIs, and data-driven applications.",
     location: "India",
+    aboutSubtitle: "Turning complex problems into reliable, maintainable software.",
     aboutNodes: [
       {
-        eyebrow: "NODE // 01 · SYSTEMS",
-        title: "High-Throughput Core",
-        description: "Low-latency services, spatial telemetry pipelines, and ACID-compliant transactional backends in Java & Spring Boot.",
+        eyebrow: "NODE // 01 · ENGINEERING",
+        title: "Building Reliable Software",
+        description:
+          "I focus on building software that is reliable, maintainable, and built to handle real-world use - from designing APIs and data flows to making sure systems behave predictably as they grow.",
       },
+
       {
-        eyebrow: "NODE // 02 · ARCHITECTURE",
-        title: "Simplifying Complexity",
-        description: "Decomposing distributed friction into modular microservices with strict separation of concerns and robust indexing.",
+        eyebrow: "NODE // 02 · SYSTEMS",
+        title: "Thinking Beyond the Code",
+        description:
+          "I care about how the pieces fit together - architecture, data, APIs, infrastructure, and the trade-offs between them. I aim for systems that are clear enough to understand and flexible enough to evolve.",
       },
+
       {
-        eyebrow: "NODE // 03 · AI & PIPELINES",
-        title: "Grounding & Vector Retrieval",
-        description: "Integrating RAG pipelines and pgvector search with verified grounding to automate enterprise workflows.",
+        eyebrow: "NODE // 03 · DELIVERY",
+        title: "Turning Ideas Into Products",
+        description:
+          "I like taking a problem from idea to working software - designing the system, building the core functionality, connecting the pieces, and iterating until it becomes something people can actually use.",
       },
     ],
   },
+
+  // ================================================================
+  // SECTION: Scroll timeline / left-hand progress rail (all phases)
+  // Drives the section labels and 0–1 scroll-progress ranges used by
+  // every Phase0X component's useTransform calls.
+  // ================================================================
   checkpoints: [
     { id: "intro", number: "01", title: "Introduction", range: [0.0, 0.45], activeInPhase1: true },
     { id: "about", number: "02", title: "About Me", range: [0.45, 0.62], activeInPhase1: true },
@@ -36,107 +60,144 @@ export const portfolioData: PortfolioData = {
     { id: "problem-solving", number: "06", title: "Problem Solving", range: [0.94, 0.98], activeInPhase1: true },
     { id: "connect", number: "07", title: "Connect", range: [0.98, 1.0], activeInPhase1: true },
   ],
+
+  // ================================================================
+  // SECTION: Phase03ProjectsWorkspace ("DEPLOYED SYSTEMS" panel)
+  // One entry per project card. `topology` feeds the right-hand
+  // "// TECH TOPOLOGY" panel for that project.
+  // ================================================================
   projects: [
     {
       id: "wealth-tracker",
       title: "Wealth Tracker",
       role: "Backend Lead / Architect",
-      tagline: "Backend-focused financial tracking and portfolio analytics platform",
+      tagline: "Full-stack investment & net-worth tracking platform",
       description:
-        "High-performance asset tracking system built for granular portfolio computation and transaction auditing.",
-      technologies: ["Java", "Spring Boot", "PostgreSQL", "Redis", "Docker"],
-      metrics: ["Sub-50ms query latency", "ACID compliant ledger"],
-      focus: "High-concurrency data models, transaction isolation, and modular REST microservices.",
-      reliability: "Resilient error propagation, query indexing, and verifiable ledger contracts.",
-      topology: { title: "ACID FINANCIAL LEDGER", sourceLabel: "LEDGER_ENGINE // SERIALIZABLE", statusLabel: "AUDIT_TRAIL: ACTIVE", details: ["Sub-50ms Query", "PostgreSQL + Redis", "ACID Ledger Compliant", "Dockerized Lifecycle"] },
-      github: "https://github.com/namankhurana",
+        "A Spring Boot backend paired with a Next.js frontend for tracking investments, assets, and net worth over time, with secure auth and role-gated access.",
+      technologies: ["Java", "Spring Boot", "Next.js", "JWT", "RBAC", "React Query", "Chart.js", "Docker Compose"],
+      metrics: ["JWT refresh-token rotation", "Role-based access control"],
+      focus: "Clean API layering using MapStruct for DTO mapping and the Builder pattern for complex object construction.",
+      reliability: "Refresh-token rotation for session security, with RBAC-gated endpoints across roles.",
+      topology: { title: "AUTH & DATA FLOW", sourceLabel: "SPRING_BOOT // JWT_REFRESH", statusLabel: "RBAC: ENFORCED", details: ["Spring Boot + Next.js", "JWT Refresh Rotation", "MapStruct DTO Mapping", "Dockerized via Compose"] },
+      github: "https://github.com/Naman-Khurana/wealthTrackerProject",
     },
     {
-      id: "placement-portal",
+      id: "campushire",
       title: "Placement Portal",
       role: "Full-Stack Engineer",
-      tagline: "Comprehensive recruitment lifecycle & candidate management platform",
+      tagline: "Campus placement portal for the full recruitment lifecycle",
       description:
-        "Engineered role-based access, automated interview scheduling pipelines, and real-time candidate evaluation flows.",
-      technologies: ["Java", "Spring Security", "MySQL", "React", "REST APIs"],
-      metrics: ["Over 2,000+ candidate applications handled"],
-      focus: "Role-based access security, candidate state machines, and evaluation pipelines.",
-      reliability: "Transactional consistency during high-volume interview schedule dispatches.",
-      topology: { title: "RECRUITMENT PIPELINE", sourceLabel: "AUTH_RBAC // SPRING_SECURITY", statusLabel: "PIPELINE: REAL-TIME", details: ["<30ms REST API", "MySQL Enterprise", "Role-Based Token Auth", "Dockerized Lifecycle"] },
-      github: "https://github.com/namankhurana",
+        "Built as the IITM MAD 2 capstone project — manages campus placements end-to-end, from job postings and applications to interview scheduling and candidate tracking, with role-based views for students, recruiters, and admins.",
+      technologies: ["Vue.js", "Flask", "SQLAlchemy", "SQLite", "Redis", "Celery", "Pinia", "Bootstrap"],
+      metrics: [],
+      focus: "Role-based dashboards (student / recruiter / admin) with Celery-driven background jobs for exports and reminders.",
+      reliability: "Redis-backed caching and async task queues to keep the UI responsive during bulk operations.",
+      topology: { title: "RECRUITMENT PIPELINE", sourceLabel: "FLASK // ROLE_BASED_ACCESS", statusLabel: "QUEUE: CELERY", details: ["Vue.js + Flask", "SQLAlchemy ORM", "Redis + Celery Jobs", "Pinia State Management"] },
+      github: "https://github.com/Naman-Khurana/placement_portal_V2",
     },
     {
-      id: "ai-customer-service",
-      title: "AI Customer Service / RAG System",
+      id: "nexaserve-ai",
+      title: "NexaServe AI",
       role: "AI & Backend Engineer",
-      tagline: "Enterprise contextual retrieval-augmented generation engine",
+      tagline: "Document-grounded AI assistant with retrieval-augmented generation",
       description:
-        "Vector search engine integrated with customer support workflows to autonomously resolve complex queries with verified grounding.",
-      technologies: ["Python", "FastAPI", "PostgreSQL pgvector", "LangChain", "Docker"],
-      metrics: ["70% reduction in first-response escalation time"],
-      focus: "Dense vector similarity search, context grounding, and low-latency inference dispatch.",
-      reliability: "Anti-hallucination verification boundaries and source chunk citation grounding.",
-      topology: { title: "VECTOR RAG ENGINE", sourceLabel: "PGVECTOR // COSINE_SIMILARITY", statusLabel: "GROUNDED: VERIFIED", details: ["<120ms Vector Search", "pgvector Embeddings", "Context-Bound Citations", "Dockerized Lifecycle"] },
-      github: "https://github.com/namankhurana",
+        "A RAG-based assistant that answers questions grounded in uploaded documents (multi-PDF support), built on Flask with LangChain and FAISS for retrieval and the Gemini API for generation. Falls back gracefully when retrieval confidence is low, instead of guessing.",
+      technologies: ["Python", "Flask", "LangChain", "FAISS", "Gemini API"],
+      metrics: [],
+      focus: "Vector similarity search over document chunks with prompt grounding to reduce hallucination.",
+      reliability: "Confidence-based escalation — the assistant defers rather than answering when it isn't confident in the retrieved context.",
+      topology: { title: "RAG PIPELINE", sourceLabel: "FAISS // COSINE_SIMILARITY", statusLabel: "GROUNDED: MULTI-PDF", details: ["Flask + LangChain", "FAISS Vector Store", "Gemini API Generation", "Confidence-Based Fallback"] },
+      github: "https://github.com/Naman-Khurana/NexaServeAI",
     },
   ],
+
+  // ================================================================
+  // SECTION: Phase04 Experience ("PRODUCTION ENVIRONMENTS" panel)
+  // One entry per job/internship.
+  // ================================================================
   experience: [
     {
       company: "Onelap Telematics",
       role: "Software Engineering Intern / Backend Engineer",
       period: "Aug 2025 - Feb 2026",
       description: [
-        "Architected scalable telematics telemetry processors handling continuous GPS data streams.",
-        "Implemented trip and stoppage detection algorithms with robust spatial indexing.",
+        "Debugged and resolved a silent real-time alert failure in a microservices architecture by tracing a cross-service state refresh that broadcasted to all user-owned devices instead of the triggering device.",
+        "Developed a Spring Boot service to parse over 100K daily GPS records, extracting trip and stop events while effectively handling dropped packets, invalid coordinates, and offline device scenarios.",
+        "Designed a fault-tolerant background recovery service that detects and recomputes missing daily data summaries on demand, ensuring 100% data completeness when scheduled cron jobs fail across services.",
+        "Migrated a mobile Flutter app to a web application within an Agile sprint cycle, integrating over 6 web-compatible APIs (Google Maps JS, Firebase Web, WebSocket) to replace incompatible plugins, successfully shipping to production.",
+        "Redesigned device troubleshooting logic by mapping unhandled failure states, resulting in a ~70% reduction in escalation rate.",
+        "Reduced over 2 redundant API calls per session by replacing timer-based polling with state-driven triggers.",
 
       ],
       technologies: ["Java", "Spring Boot", "PostgreSQL", "REST APIs", "Flutter", "Dart"],
       keyHighlight: "Optimized geospatial query processing on millions of GPS coordinates.",
     },
   ],
+
+  // ================================================================
+  // SECTION: Phase05Engineering ("SYSTEM TOPOLOGY MATRIX")
+  // One entry per tier. Any number of entries works — Phase05Engineering
+  // auto-positions them around the hub and cycles through its color
+  // palette. Optional per-entry overrides (both default from `category`
+  // and `items` if omitted):
+  //   badge?: string        -> small label under the category name
+  //   streamLabel?: string  -> bottom telemetry bar text when tier is active
+  // ================================================================
   skills: [
     {
       category: "Backend & Systems",
-      items: ["Java", "Spring Boot", "Spring Security", "RESTful APIs", "Microservices Architecture"],
+      items: ["Java", "Spring Boot", "Spring Security", "RESTful APIs", "Microservices Architecture", "Python", "Flask"],
       capability: "Relational schema normalization, high-frequency caching, geospatial indexing, and ACID transaction auditing.",
-      metric: "Sub-50ms query latency on complex analytical joins with connection pooling optimization.",
+      metric: "Applied on a production geospatial telemetry pipeline handling continuous GPS streams.",
     },
     {
       category: "Databases & Caching",
-      items: ["PostgreSQL", "MySQL", "Redis", "JPA / Hibernate", "Database Optimization"],
-      capability: "Decoupled REST microservices, asynchronous message queues, high-throughput RPC endpoints, and secure auth layers.",
-      metric: "Concurrent request handling with thread-safe execution and resilient backpressure.",
+      items: ["PostgreSQL", "MySQL", "SQLAlchemy", "Redis", "JPA / Hibernate"],
+      capability: "Schema design, query optimization, and caching layers across relational stores.",
+      metric: "Used across production (PostgreSQL) and portfolio (MySQL/SQLite) projects.",
     },
     {
       category: "DevOps & Infrastructure",
-      items: ["Docker", "Git", "CI/CD Pipelines", "Linux", "Nginx"],
-      capability: "Containerized application lifecycle, multi-stage Docker builds, reproducible CI/CD pipelines, and reverse proxies.",
-      metric: "Zero-downtime deployment workflows with immutable container tagging and Linux hardening.",
+      items: ["Docker", "Git", "CI/CD Pipelines", "Linux"],
+      capability: "Containerized application lifecycle, multi-stage Docker builds, and reproducible dev environments.",
+      metric: "Docker Compose used for local multi-service orchestration on portfolio projects.",
     },
     {
-      category: "Methodologies & Concepts",
-      items: ["Data Structures & Algorithms", "System Design", "RAG & Vector Search", "Clean Architecture"],
-      capability: "Granular computational efficiency, vector similarity search, modular domain design, and resilient failure isolation.",
-      metric: "Context-aware vector embeddings with optimized cosine similarity indexing.",
+      category: "Frontend & Full-Stack",
+      items: ["Next.js", "Vue.js", "React Query", "Pinia", "Chart.js", "Bootstrap", "HTML", "CSS", "Tailwind CSS", "JavaScript", "TypeScript"],
+      capability: "Pairing backend services with responsive, state-managed frontends to ship complete products, not just APIs.",
+      metric: "Shipped end-to-end on Wealth Tracker (Next.js) and CampusHire (Vue.js + Pinia).",
     },
   ],
+
+  // ================================================================
+  // SECTION: legacy coding-profile links (kept in sync with
+  // problemSolving.platforms below — some older component may still
+  // read this array directly for icon links, e.g. in the footer/hero).
+  // ================================================================
   codingProfiles: [
     {
       platform: "LeetCode",
-      handle: "namankhurana",
-      url: "https://leetcode.com",
+      handle: "naman2004",
+      url: "https://leetcode.com/u/naman2004",
     },
     {
       platform: "Codeforces",
-      handle: "namankhurana",
-      url: "https://codeforces.com",
+      handle: "NamanKhurana",
+      url: "https://codeforces.com/profile/NamanKhurana",
     },
     {
       platform: "AlgoZenith",
-      handle: "namankhurana",
-      url: "https://algozenith.com",
+      handle: "Naman_Khurana",
+      url: "https://maang.in/users/Naman_Khurana",
     },
   ],
+
+  // ================================================================
+  // SECTION: Phase06 Problem Solving ("ALGORITHMIC_GRAPH" panel)
+  // philosophy/topics -> left-hand blurb + topic tags
+  // platforms[]       -> one card per practice platform
+  // ================================================================
   problemSolving: {
     philosophy: "Decompose high-dimension complexity into atomic subproblems. Rigorously optimize invariant bounds (O(N log N) / O(V+E)), stress-test edge conditions, and enforce deterministic correctness.",
     topics: [
@@ -152,7 +213,6 @@ export const portfolioData: PortfolioData = {
         name: "LeetCode",
         handle: "naman2004",
         url: "https://leetcode.com/u/naman2004",
-
         statusText: "Algorithmic Pattern Mastery",
         metrics: [],
       },
@@ -176,6 +236,10 @@ export const portfolioData: PortfolioData = {
       },
     ],
   },
+
+  // ================================================================
+  // SECTION: Phase07 Connect (footer / contact panel)
+  // ================================================================
   contact: {
     email: "namankhurana.dev@gmail.com",
     github: "https://www.github.com/naman-khurana",

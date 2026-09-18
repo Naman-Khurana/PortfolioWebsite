@@ -122,10 +122,10 @@ export const Phase06ProblemSolving: React.FC = () => {
         prefersReducedMotion
           ? { pointerEvents: isInteractive ? "auto" : "none" }
           : {
-              opacity: containerOpacity,
-              y: containerY,
-              pointerEvents: isInteractive ? "auto" : "none",
-            }
+            opacity: containerOpacity,
+            y: containerY,
+            pointerEvents: isInteractive ? "auto" : "none",
+          }
       }
     >
       {/* ============================================================
@@ -172,7 +172,7 @@ export const Phase06ProblemSolving: React.FC = () => {
             LEFT COLUMN: ALGORITHMIC GRAPH & DSA HEURISTICS
             ============================================================ */}
         <div className="flex-1 flex flex-col gap-3 min-h-0">
-          
+
           {/* Graph Title & Description */}
           <div className="flex items-center justify-between">
             <div>
@@ -255,11 +255,10 @@ export const Phase06ProblemSolving: React.FC = () => {
                   style={{ left: `${leftPct}%`, top: `${topPct}%` }}
                 >
                   <div
-                    className={`px-3 py-2 rounded-xl border backdrop-blur-xl transition-all duration-300 flex flex-col items-center gap-0.5 ${
-                      isSelected
+                    className={`px-3 py-2 rounded-xl border backdrop-blur-xl transition-all duration-300 flex flex-col items-center gap-0.5 ${isSelected
                         ? `${node.border} ${node.bgActive} ${node.glow} scale-110 ring-2 ring-white/30`
                         : "border-white/10 bg-black/80 hover:border-white/30 hover:scale-105"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className={`w-2 h-2 rounded-full ${node.accent} ${isSelected ? "animate-ping" : ""}`} />
@@ -316,7 +315,7 @@ export const Phase06ProblemSolving: React.FC = () => {
             RIGHT COLUMN: VERIFIED TELEMETRY EVIDENCE MODULES
             ============================================================ */}
         <div className="w-full lg:w-[460px] xl:w-[500px] flex flex-col gap-3 shrink-0 overflow-y-auto pr-1">
-          
+
           <div className="flex items-center justify-between">
             <div>
               <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider flex items-center gap-2">
@@ -340,13 +339,13 @@ export const Phase06ProblemSolving: React.FC = () => {
               const accentColor = isLeetCode
                 ? "text-amber-400"
                 : isCodeforces
-                ? "text-sky-400"
-                : "text-purple-400";
+                  ? "text-sky-400"
+                  : "text-purple-400";
               const borderTheme = isLeetCode
                 ? "hover:border-amber-500/40"
                 : isCodeforces
-                ? "hover:border-sky-500/40"
-                : "hover:border-purple-500/40";
+                  ? "hover:border-sky-500/40"
+                  : "hover:border-purple-500/40";
 
               return (
                 <div

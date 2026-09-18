@@ -6,25 +6,149 @@
  * Phase 05: Engineering (0.88 – 0.95)
  * Concept: "The System Matrix / Transparent Control Room"
  *
- * Visualizes Naman Khurana's backend engineering stack as a live,
- * interconnected system topology and data flow matrix.
+ * Visualizes the backend engineering stack as a live, interconnected
+ * system topology and data flow matrix.
  *
- * Asymmetric layout:
- * - Left: Vertical Tier Selector + Deep Architecture Specification Inspector
- * - Right: Interactive SVG System Topology Matrix with live conduits and node packets
+ * REUSABILITY NOTE:
+ * Every node, color, label, and SVG connection below is generated from
+ * `portfolioData.skills` — nothing is hardcoded per-tier anymore. To add
+ * a new tier, just add a new entry to `skills` in your data file:
+ *
+ *   {
+ *     category: "Cloud & Networking",
+ *     items: ["AWS", "Terraform", "VPC"],
+ *     capability: "...",
+ *     metric: "...",
+ *     // optional overrides — omit these and sensible defaults are used:
+ *     badge: "CLOUD & NETWORKING",          // defaults to category.toUpperCase()
+ *     streamLabel: "AWS // TERRAFORM // VPC" // defaults to first 3 items joined
+ *   }
+ *
+ * It will automatically get a color from the palette, a position on the
+ * circular layout, and a spot in the tier selector grid. No math, colors,
+ * or positions live in the data file — only content does.
  *
  * Sits inside GatewaySpatialBridge as a semi-transparent HUD overlay,
- * keeping the physical room & engineer at the wall (04-wall.png) visible in the background.
+ * keeping the physical room & engineer at the wall (04-wall.png) visible
+ * in the background.
  */
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion, useTransform } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import { useTimeline } from "@/context/TimelineContext";
 
+// ================================================================
+// COLOR PALETTE — cycles automatically, so any number of tiers works.
+// Add more entries here if you want more distinct colors before repeats.
+// ================================================================
+const PALETTE = [
+  {
+    color: "text-amber-400",
+    border: "border-amber-500/40",
+    glow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]",
+    bgActive: "bg-amber-500/15",
+    accent: "bg-amber-400",
+    hex: "#f59e0b",
+  },
+  {
+    color: "text-sky-400",
+    border: "border-sky-500/40",
+    glow: "shadow-[0_0_30px_rgba(56,189,248,0.2)]",
+    bgActive: "bg-sky-500/15",
+    accent: "bg-sky-400",
+    hex: "#38bdf8",
+  },
+  {
+    color: "text-emerald-400",
+    border: "border-emerald-500/40",
+    glow: "shadow-[0_0_30px_rgba(52,211,153,0.2)]",
+    bgActive: "bg-emerald-500/15",
+    accent: "bg-emerald-400",
+    hex: "#34d399",
+  },
+  {
+    color: "text-purple-400",
+    border: "border-purple-500/40",
+    glow: "shadow-[0_0_30px_rgba(192,132,252,0.2)]",
+    bgActive: "bg-purple-500/15",
+    accent: "bg-purple-400",
+    hex: "#c084fc",
+  },
+  {
+    color: "text-rose-400",
+    border: "border-rose-500/40",
+    glow: "shadow-[0_0_30px_rgba(251,113,133,0.2)]",
+    bgActive: "bg-rose-500/15",
+    accent: "bg-rose-400",
+    hex: "#fb7185",
+  },
+  {
+    color: "text-cyan-400",
+    border: "border-cyan-500/40",
+    glow: "shadow-[0_0_30px_rgba(34,211,238,0.2)]",
+    bgActive: "bg-cyan-500/15",
+    accent: "bg-cyan-400",
+    hex: "#22d3ee",
+  },
+  {
+    color: "text-orange-400",
+    border: "border-orange-500/40",
+    glow: "shadow-[0_0_30px_rgba(251,146,60,0.2)]",
+    bgActive: "bg-orange-500/15",
+    accent: "bg-orange-400",
+    hex: "#fb923c",
+  },
+  {
+    color: "text-lime-400",
+    border: "border-lime-500/40",
+    glow: "shadow-[0_0_30px_rgba(163,230,53,0.2)]",
+    bgActive: "bg-lime-500/15",
+    accent: "bg-lime-400",
+    hex: "#a3e635",
+  },
+];
+
+const VIEW_W = 640;
+const VIEW_H = 440;
+const HUB_X = VIEW_W / 2;
+const HUB_Y = VIEW_H / 2;
+const RADIUS_X = VIEW_W * 0.28;
+const RADIUS_Y = VIEW_H * 0.35;
+
+// Optional per-tier overrides a skill group can supply; everything else
+// is auto-derived so the data file never has to think about layout.
+type SkillGroup = (typeof portfolioData.skills)[number] & {
+  badge?: string;
+  streamLabel?: string;
+};
+
+function buildTierThemes(skills: SkillGroup[]) {
+  const n = skills.length || 1;
+  return skills.map((skill, index) => {
+    const palette = PALETTE[index % PALETTE.length];
+    const angle = ((-90 + (360 / n) * index) * Math.PI) / 180;
+    const cx = Math.round(HUB_X + RADIUS_X * Math.cos(angle));
+    const cy = Math.round(HUB_Y + RADIUS_Y * Math.sin(angle));
+
+    return {
+      ...palette,
+      code: `TIER // ${String(index + 1).padStart(2, "0")}`,
+      badge: (skill.badge ?? skill.category).toUpperCase(),
+      streamLabel: (skill.streamLabel ?? skill.items.slice(0, 3).join(" // ")).toUpperCase(),
+      cx,
+      cy,
+    };
+  });
+}
+
 export const Phase05Engineering: React.FC = () => {
   const { scrollProgress, prefersReducedMotion, currentProgress } = useTimeline();
   const [activeTier, setActiveTier] = useState<number>(0);
+
+  const skills = portfolioData.skills as SkillGroup[];
+  const tierThemes = useMemo(() => buildTierThemes(skills), [skills]);
+  const tierCount = tierThemes.length;
 
   // ================================================================
   // TIMING & READING WINDOW PLATEAUS
@@ -44,59 +168,8 @@ export const Phase05Engineering: React.FC = () => {
     ["16px", "0px", "0px", "-16px"]
   );
 
-  const headerOpacity = useTransform(scrollProgress, [0.880, 0.895], [0, 1]);
-  const contentOpacity = useTransform(scrollProgress, [0.885, 0.900], [0, 1]);
-
-  const tierThemes = [
-    {
-      code: "TIER // 01",
-      badge: "STATE & STORAGE",
-      color: "text-amber-400",
-      border: "border-amber-500/40",
-      glow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]",
-      bgActive: "bg-amber-500/15",
-      accent: "bg-amber-400",
-      streamLabel: "ACID TRANSACTIONS // POSTGRESQL // REDIS",
-      cx: 140,
-      cy: 220,
-    },
-    {
-      code: "TIER // 02",
-      badge: "CORE SERVICES & API MESH",
-      color: "text-sky-400",
-      border: "border-sky-500/40",
-      glow: "shadow-[0_0_30px_rgba(56,189,248,0.2)]",
-      bgActive: "bg-sky-500/15",
-      accent: "bg-sky-400",
-      streamLabel: "SPRING BOOT // RESTFUL SERVICES // QUEUES",
-      cx: 320,
-      cy: 110,
-    },
-    {
-      code: "TIER // 03",
-      badge: "INFRASTRUCTURE & RUNTIMES",
-      color: "text-emerald-400",
-      border: "border-emerald-500/40",
-      glow: "shadow-[0_0_30px_rgba(52,211,153,0.2)]",
-      bgActive: "bg-emerald-500/15",
-      accent: "bg-emerald-400",
-      streamLabel: "DOCKER // CI/CD PIPELINES // NGINX",
-      cx: 320,
-      cy: 330,
-    },
-    {
-      code: "TIER // 04",
-      badge: "INTELLIGENCE & DESIGN",
-      color: "text-purple-400",
-      border: "border-purple-500/40",
-      glow: "shadow-[0_0_30px_rgba(192,132,252,0.2)]",
-      bgActive: "bg-purple-500/15",
-      accent: "bg-purple-400",
-      streamLabel: "VECTOR SEARCH // SYSTEM DESIGN // RAG",
-      cx: 500,
-      cy: 220,
-    },
-  ];
+  const headerOpacity = useTransform(scrollProgress, [0.88, 0.895], [0, 1]);
+  const contentOpacity = useTransform(scrollProgress, [0.885, 0.9], [0, 1]);
 
   const currentTheme = tierThemes[activeTier] || tierThemes[0];
   const isInteractive = currentProgress >= 0.88 && currentProgress < 0.935;
@@ -108,10 +181,10 @@ export const Phase05Engineering: React.FC = () => {
         prefersReducedMotion
           ? { pointerEvents: isInteractive ? "auto" : "none" }
           : {
-              opacity: containerOpacity,
-              y: containerY,
-              pointerEvents: isInteractive ? "auto" : "none",
-            }
+            opacity: containerOpacity,
+            y: containerY,
+            pointerEvents: isInteractive ? "auto" : "none",
+          }
       }
     >
       {/* ============================================================
@@ -122,7 +195,6 @@ export const Phase05Engineering: React.FC = () => {
         style={prefersReducedMotion ? {} : { opacity: headerOpacity }}
       >
         <div className="flex items-center gap-3">
-          {/* Status Lights */}
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
             <span className="font-mono text-xs text-sky-300 font-semibold tracking-wider">
@@ -136,11 +208,10 @@ export const Phase05Engineering: React.FC = () => {
           </div>
         </div>
 
-        {/* Phase tag & Telemetry */}
         <div className="flex items-center gap-3 text-xs font-mono">
           <div className="hidden md:flex items-center gap-2 text-white/40">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>NODES: 4 TIERS OPERATIONAL</span>
+            <span>NODES: {tierCount} TIERS OPERATIONAL</span>
           </div>
           <span className="text-white/20 hidden md:inline">|</span>
           <span className="text-amber-400/80 font-medium">PHASE 05 // ENGINEERING</span>
@@ -158,36 +229,34 @@ export const Phase05Engineering: React.FC = () => {
             LEFT COLUMN: TIER SELECTOR + DEEP ARCHITECTURE SPEC
             ============================================================ */}
         <div className="w-full lg:w-[440px] xl:w-[480px] flex flex-col gap-3.5 shrink-0 overflow-y-auto pr-1">
-          
-          {/* Tier Selection Buttons */}
           <div className="space-y-2">
             <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider flex items-center justify-between">
               <span>Select Architecture Tier</span>
-              <span className="text-white/25">4 TIERS MAPPED</span>
+              <span className="text-white/25">{tierCount} TIERS MAPPED</span>
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              {portfolioData.skills.map((skillGroup, index) => {
-                const theme = tierThemes[index] || tierThemes[0];
+              {skills.map((skillGroup, index) => {
+                const theme = tierThemes[index];
                 const isSelected = activeTier === index;
 
                 return (
                   <button
                     key={skillGroup.category}
                     onClick={() => setActiveTier(index)}
-                    className={`text-left p-3 rounded-xl border transition-all flex flex-col gap-1 ${
-                      isSelected
+                    className={`text-left p-3 rounded-xl border transition-all flex flex-col gap-1 ${isSelected
                         ? `${theme.border} ${theme.bgActive} ${theme.glow} ring-1 ring-white/20`
                         : "border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/15"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between">
                       <span className={`font-mono text-[9px] font-bold ${theme.color}`}>
                         {theme.code}
                       </span>
-                      <span className={`text-[8px] font-mono px-1.5 py-0.2 rounded-full ${
-                        isSelected ? "bg-white/15 text-white" : "bg-white/5 text-white/30"
-                      }`}>
+                      <span
+                        className={`text-[8px] font-mono px-1.5 py-0.2 rounded-full ${isSelected ? "bg-white/15 text-white" : "bg-white/5 text-white/30"
+                          }`}
+                      >
                         {isSelected ? "ACTIVE" : "VIEW"}
                       </span>
                     </div>
@@ -211,7 +280,7 @@ export const Phase05Engineering: React.FC = () => {
                   {currentTheme.code} // {currentTheme.badge}
                 </span>
                 <h3 className="text-base font-bold text-white tracking-tight">
-                  {portfolioData.skills[activeTier]?.category}
+                  {skills[activeTier]?.category}
                 </h3>
               </div>
               <span className="font-mono text-[9px] px-2 py-0.5 rounded bg-white/5 text-white/50 border border-white/10">
@@ -219,11 +288,10 @@ export const Phase05Engineering: React.FC = () => {
               </span>
             </div>
 
-            {/* Technology Stack Chips */}
             <div>
               <div className="text-[10px] font-mono text-white/40 uppercase mb-2">Integrated Stack</div>
               <div className="flex flex-wrap gap-1.5">
-                {portfolioData.skills[activeTier]?.items.map((item) => (
+                {skills[activeTier]?.items.map((item) => (
                   <span
                     key={item}
                     className="text-[11px] font-mono px-2 py-1 rounded-md bg-white/[0.04] text-white/80 border border-white/10"
@@ -234,14 +302,13 @@ export const Phase05Engineering: React.FC = () => {
               </div>
             </div>
 
-            {/* Architecture Details */}
             <div className="space-y-2 pt-1">
               <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 font-mono">
                 <span className="text-[9px] text-amber-400 block mb-0.5 font-semibold uppercase">
                   CORE CAPABILITY
                 </span>
                 <p className="text-xs text-white/80 leading-relaxed font-sans">
-                  {portfolioData.skills[activeTier]?.capability}
+                  {skills[activeTier]?.capability}
                 </p>
               </div>
 
@@ -250,21 +317,18 @@ export const Phase05Engineering: React.FC = () => {
                   TECHNICAL METRIC
                 </span>
                 <p className="text-xs text-white/80 leading-relaxed font-sans">
-                  {portfolioData.skills[activeTier]?.metric}
+                  {skills[activeTier]?.metric}
                 </p>
               </div>
             </div>
-
           </div>
-
         </div>
 
         {/* ============================================================
             RIGHT COLUMN: INTERACTIVE SVG SYSTEM TOPOLOGY MATRIX
+            Fully generated from tierThemes — any node count works.
             ============================================================ */}
         <div className="flex-1 rounded-xl border border-white/10 bg-black/40 backdrop-blur-md p-4 sm:p-5 flex flex-col justify-between overflow-hidden relative">
-          
-          {/* Header */}
           <div className="flex items-center justify-between border-b border-white/10 pb-3 shrink-0">
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${currentTheme.accent} animate-ping`} />
@@ -272,58 +336,55 @@ export const Phase05Engineering: React.FC = () => {
                 Interactive Topology Matrix // Live Mesh
               </span>
             </div>
-            <span className="font-mono text-[10px] text-white/40">
-              CLICK ANY NODE TO INSPECT
-            </span>
+            <span className="font-mono text-[10px] text-white/40">CLICK ANY NODE TO INSPECT</span>
           </div>
 
-          {/* SVG Diagram Canvas */}
           <div className="relative flex-1 my-3 rounded-xl bg-black/50 border border-white/5 overflow-hidden flex items-center justify-center min-h-[300px]">
-            
-            {/* Ambient Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] [background-size:24px_24px]" />
-            
-            {/* SVG Connections & Packets */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 640 440" fill="none">
+
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+              fill="none"
+            >
               <defs>
-                <linearGradient id="streamGrad1" x1="140" y1="220" x2="320" y2="110" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#f59e0b" stopOpacity="0.8" />
-                  <stop offset="1" stopColor="#38bdf8" stopOpacity="0.8" />
-                </linearGradient>
-                <linearGradient id="streamGrad2" x1="320" y1="110" x2="500" y2="220" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#38bdf8" stopOpacity="0.8" />
-                  <stop offset="1" stopColor="#c084fc" stopOpacity="0.8" />
-                </linearGradient>
-                <linearGradient id="streamGrad3" x1="140" y1="220" x2="320" y2="330" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#f59e0b" stopOpacity="0.8" />
-                  <stop offset="1" stopColor="#34d399" stopOpacity="0.8" />
-                </linearGradient>
-                <linearGradient id="streamGrad4" x1="320" y1="330" x2="500" y2="220" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#34d399" stopOpacity="0.8" />
-                  <stop offset="1" stopColor="#c084fc" stopOpacity="0.8" />
-                </linearGradient>
+                {tierThemes.map((theme, index) => (
+                  <linearGradient
+                    key={`grad-${index}`}
+                    id={`streamGrad-${index}`}
+                    x1={theme.cx}
+                    y1={theme.cy}
+                    x2={HUB_X}
+                    y2={HUB_Y}
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor={theme.hex} stopOpacity="0.8" />
+                    <stop offset="1" stopColor="#ffffff" stopOpacity="0.15" />
+                  </linearGradient>
+                ))}
               </defs>
 
-              {/* Data Conduits */}
-              <path d="M 140 220 C 220 220, 240 110, 320 110" stroke="url(#streamGrad1)" strokeWidth="2" strokeDasharray="6 6" />
-              <path d="M 320 110 C 400 110, 420 220, 500 220" stroke="url(#streamGrad2)" strokeWidth="2" strokeDasharray="6 6" />
-              <path d="M 140 220 C 220 220, 240 330, 320 330" stroke="url(#streamGrad3)" strokeWidth="2" strokeDasharray="6 6" />
-              <path d="M 320 330 C 400 330, 420 220, 500 220" stroke="url(#streamGrad4)" strokeWidth="2" strokeDasharray="6 6" />
-              <path d="M 320 110 L 320 330" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="4 4" />
+              {/* Hub-and-spoke conduits: every node connects to the central hub,
+                  so this scales cleanly to any number of tiers. */}
+              {tierThemes.map((theme, index) => (
+                <path
+                  key={`path-${index}`}
+                  d={`M ${theme.cx} ${theme.cy} L ${HUB_X} ${HUB_Y}`}
+                  stroke={`url(#streamGrad-${index})`}
+                  strokeWidth="2"
+                  strokeDasharray="6 6"
+                />
+              ))}
 
-              {/* Central Bridge Hub */}
-              <circle cx="320" cy="220" r="18" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" />
-              <circle cx="320" cy="220" r="6" fill="#38bdf8" className="animate-pulse" />
+              <circle cx={HUB_X} cy={HUB_Y} r="18" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" />
+              <circle cx={HUB_X} cy={HUB_Y} r="6" fill="#38bdf8" className="animate-pulse" />
             </svg>
 
-            {/* Interactive Spatial HTML Nodes positioned over SVG coordinates */}
             {tierThemes.map((theme, index) => {
               const isSelected = activeTier === index;
-              const skill = portfolioData.skills[index];
-
-              // Coordinate percentages mapped to 640x440 viewBox
-              const leftPct = (theme.cx / 640) * 100;
-              const topPct = (theme.cy / 440) * 100;
+              const skill = skills[index];
+              const leftPct = (theme.cx / VIEW_W) * 100;
+              const topPct = (theme.cy / VIEW_H) * 100;
 
               return (
                 <div
@@ -333,31 +394,25 @@ export const Phase05Engineering: React.FC = () => {
                   style={{ left: `${leftPct}%`, top: `${topPct}%` }}
                 >
                   <div
-                    className={`px-3.5 py-2.5 rounded-xl border backdrop-blur-xl transition-all duration-300 flex flex-col items-center gap-1 ${
-                      isSelected
+                    className={`px-3.5 py-2.5 rounded-xl border backdrop-blur-xl transition-all duration-300 flex flex-col items-center gap-1 ${isSelected
                         ? `${theme.border} ${theme.bgActive} ${theme.glow} scale-110 ring-2 ring-white/30`
                         : "border-white/10 bg-black/70 hover:scale-105 hover:border-white/30"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className={`w-2 h-2 rounded-full ${theme.accent} ${isSelected ? "animate-ping" : ""}`} />
-                      <span className={`font-mono text-[9px] font-bold ${theme.color}`}>
-                        {theme.code}
-                      </span>
+                      <span className={`font-mono text-[9px] font-bold ${theme.color}`}>{theme.code}</span>
                     </div>
                     <span className="text-[11px] font-semibold text-white tracking-tight whitespace-nowrap">
                       {skill?.category}
                     </span>
-                    <span className="text-[8px] font-mono text-white/50">
-                      {theme.badge}
-                    </span>
+                    <span className="text-[8px] font-mono text-white/50">{theme.badge}</span>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Bottom Live Stream Telemetry Bar */}
           <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-white/50 shrink-0">
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${currentTheme.accent}`} />
@@ -365,10 +420,8 @@ export const Phase05Engineering: React.FC = () => {
             </div>
             <span className="text-emerald-400 font-semibold">STATUS: OPTIMIZED</span>
           </div>
-
         </div>
-
       </motion.div>
     </motion.div>
   );
-};
+}

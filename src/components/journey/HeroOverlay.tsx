@@ -58,7 +58,7 @@ export const HeroOverlay: React.FC = () => {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
           <span className="text-[11px] font-mono tracking-widest text-sky-200/90 uppercase">
-            Systems & Infrastructure
+            {identity.category}
           </span>
         </motion.div>
 
