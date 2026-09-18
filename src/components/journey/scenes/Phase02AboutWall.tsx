@@ -107,7 +107,7 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
             </span>
           </div>
           <p className="text-xs md:text-sm font-mono text-white/50 tracking-wide">
-            Distilling complexity into resilient, high-throughput backend services
+            {portfolioData.identity.aboutSubtitle}
           </p>
         </motion.div>
 
