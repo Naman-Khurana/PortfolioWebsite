@@ -4,7 +4,7 @@
 
 ### NO NEW IMAGE GENERATION FOR THE INITIAL VERSION.
 
-Use only the four existing approved artwork frames supplied by the user.
+Use only the six existing approved artwork frames supplied by the user.
 
 Do not generate:
 
@@ -22,35 +22,41 @@ At least for the initial version.
 
 # Existing Artwork
 
-Use these four frames:
+Use these six frames:
 
 ``` text
 assets/
 └── journey/
-    ├── frame-01-seated
-    ├── frame-02-standing
-    ├── frame-03-walking
-    └── frame-04-wall
+    ├── 01-seated.png
+    ├── 01_6-almost_standing.png
+    ├── 02-standing.png
+    ├── 03-wall-arrival.png
+    ├── 04-wall.png
+    └── 05-outro.png
 ```
 
 The exact filenames can be changed to match the actual repository.
 
 ------------------------------------------------------------------------
 
-# How to Use the Four Frames
+# How to Use the Six Frames
 
-They are **key visual states**, not four webpage images.
+They are **key visual states**, not six webpage images.
 
 Use them to support the first continuous sequence:
 
 ``` text
 SEATED
   ↓
+ALMOST STANDING
+  ↓
 STANDING
   ↓
-WALKING
+WALL ARRIVAL
   ↓
 WALL
+  ↓
+OUTRO
 ```
 
 Motion and CSS create the perceived movement between states.
@@ -149,11 +155,13 @@ Java · Spring Boot · PostgreSQL
 Use:
 
 -   Frame 01 --- seated
+-   Frame 01.6 --- almost standing
 -   Frame 02 --- standing
--   Frame 03 --- walking
+-   Frame 03 --- wall arrival
 -   Frame 04 --- wall
+-   Frame 05 --- outro
 
-The coding implementation should choreograph the four states.
+The coding implementation should choreograph these six states.
 
 If a perfect physical walk is impossible with the supplied artwork:
 
@@ -291,7 +299,7 @@ Contact links are real HTML.
 
 Because no new artwork is being generated:
 
-The four supplied images are the visual authority.
+The six supplied images are the visual authority.
 
 Do not try to "improve" them by replacing them.
 

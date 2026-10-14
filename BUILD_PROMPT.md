@@ -48,13 +48,15 @@ For the initial implementation:
 
 > **DO NOT GENERATE ANY NEW IMAGES.**
 
-Use only the four already-provided approved artwork frames in the
+Use only the six already-provided approved artwork frames in the
 repository/user-provided assets:
 
 1.  seated at laptop
-2.  standing
-3.  walking
-4.  standing at thinking wall
+2.  almost standing at desk
+3.  standing from desk
+4.  arriving at the thinking wall
+5.  standing at thinking wall
+6.  sunset outro
 
 Do not replace them.
 
@@ -99,7 +101,7 @@ character typing
 → character arrives
 ```
 
-Use the four existing frames as key visual states.
+Use the six existing frames as key visual states.
 
 ## Infinite scroll
 
@@ -160,7 +162,7 @@ Report:
 
 -   existing structure
 -   current implementation status
--   where the four artwork files are
+-   where the six artwork files are
 -   what can be reused
 -   what is missing
 
@@ -235,7 +237,7 @@ Do not redesign the concept.
 
 Do not decide that a slideshow would be easier.
 
-Do not replace the four approved images.
+Do not replace the six approved images.
 
 Do not generate new artwork.
 

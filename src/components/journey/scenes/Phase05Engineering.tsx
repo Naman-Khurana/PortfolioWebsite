@@ -191,7 +191,7 @@ export const Phase05Engineering: React.FC = () => {
           HUD TOP BAR
           ============================================================ */}
       <motion.div
-        className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/10 bg-white/[0.02] shrink-0"
+        className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3.5 border-b border-white/10 bg-white/[0.02] shrink-0"
         style={prefersReducedMotion ? {} : { opacity: headerOpacity }}
       >
         <div className="flex items-center gap-3">
@@ -222,13 +222,13 @@ export const Phase05Engineering: React.FC = () => {
           MAIN ASYMMETRIC VIEWPORT: Left = Specs, Right = Topology SVG
           ============================================================ */}
       <motion.div
-        className="flex-1 p-3 sm:p-5 md:p-6 overflow-hidden flex flex-col lg:flex-row gap-5 min-h-0"
+        className="flex-1 p-3 sm:p-5 md:p-6 overflow-y-auto lg:overflow-hidden overscroll-contain flex flex-col lg:flex-row gap-5 min-h-0"
         style={prefersReducedMotion ? {} : { opacity: contentOpacity }}
       >
         {/* ============================================================
             LEFT COLUMN: TIER SELECTOR + DEEP ARCHITECTURE SPEC
             ============================================================ */}
-        <div className="w-full lg:w-[440px] xl:w-[480px] flex flex-col gap-3.5 shrink-0 overflow-y-auto pr-1">
+        <div className="w-full lg:w-[440px] xl:w-[480px] flex flex-col gap-3.5 shrink-0 overflow-visible lg:overflow-y-auto pr-1">
           <div className="space-y-2">
             <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider flex items-center justify-between">
               <span>Select Architecture Tier</span>
@@ -328,7 +328,7 @@ export const Phase05Engineering: React.FC = () => {
             RIGHT COLUMN: INTERACTIVE SVG SYSTEM TOPOLOGY MATRIX
             Fully generated from tierThemes — any node count works.
             ============================================================ */}
-        <div className="flex-1 rounded-xl border border-white/10 bg-black/40 backdrop-blur-md p-4 sm:p-5 flex flex-col justify-between overflow-hidden relative">
+        <div className="flex-1 min-h-[390px] lg:min-h-0 rounded-xl border border-white/10 bg-black/40 backdrop-blur-md p-3 sm:p-5 flex flex-col justify-between overflow-hidden relative">
           <div className="flex items-center justify-between border-b border-white/10 pb-3 shrink-0">
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${currentTheme.accent} animate-ping`} />
@@ -339,7 +339,7 @@ export const Phase05Engineering: React.FC = () => {
             <span className="font-mono text-[10px] text-white/40">CLICK ANY NODE TO INSPECT</span>
           </div>
 
-          <div className="relative flex-1 my-3 rounded-xl bg-black/50 border border-white/5 overflow-hidden flex items-center justify-center min-h-[300px]">
+          <div className="relative flex-1 my-3 rounded-xl bg-black/50 border border-white/5 overflow-hidden flex items-center justify-center min-h-[250px] sm:min-h-[300px]">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] [background-size:24px_24px]" />
 
             <svg

@@ -4,6 +4,7 @@ import React from "react";
 import { TimelineProvider } from "@/context/TimelineContext";
 import { CinematicViewport } from "@/components/journey/CinematicViewport";
 import { TheWalkTransition } from "@/components/journey/scenes/TheWalkTransition";
+import { MobileNavigation } from "@/components/navigation/MobileNavigation";
 import { SideNavigation } from "@/components/navigation/SideNavigation";
 
 export default function Home() {
@@ -17,13 +18,14 @@ export default function Home() {
 
         {/* Global UI Overlays */}
         <SideNavigation />
+        <MobileNavigation />
 
         {/* 
           Scroll Track Runway:
           Provides the scroll container height that drives Motion's scrollYProgress (0.0 -> 1.0).
           Extended to 800vh for spacious, comfortable multi-phase journey progression.
         */}
-        <div className="relative h-[1100vh] pointer-events-none" aria-hidden="true" />
+        <div className="relative h-[1100svh] sm:h-[1100vh] pointer-events-none" aria-hidden="true" />
       </main>
     </TimelineProvider>
   );

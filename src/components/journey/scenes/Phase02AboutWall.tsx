@@ -97,7 +97,7 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
 
         {/* -------- HEADER LABEL -------- */}
         <motion.div
-          className="absolute top-4 md:top-8 left-1/2 -translate-x-1/2 text-center pointer-events-none"
+          className="hidden sm:block absolute top-4 md:top-8 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-auto text-center pointer-events-none"
           style={{ opacity: headerOpacity }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 border border-amber-500/30 backdrop-blur-md mb-2">
@@ -113,10 +113,10 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
 
         {/* -------- SATELLITE NODE 01: HIGH-THROUGHPUT SYSTEMS -------- */}
         <motion.div
-          className="absolute top-[20%] left-[16%] sm:left-[18%] md:left-[19%] max-w-[280px] sm:max-w-[300px] pointer-events-none"
+          className="absolute top-[18%] left-4 w-[calc(100%-2rem)] sm:w-auto sm:left-[18%] md:left-[19%] max-w-[280px] sm:max-w-[300px] pointer-events-none"
           style={{ opacity: satelliteOpacity }}
         >
-          <div className="p-4 rounded-xl bg-black/70 border border-sky-500/25 backdrop-blur-sm">
+          <div className="p-3 sm:p-4 rounded-xl bg-black/70 border border-sky-500/25 backdrop-blur-sm">
             <span className="font-mono text-[10px] text-sky-400 tracking-wider uppercase font-semibold block mb-1">
               {portfolioData.identity.aboutNodes[0].eyebrow}
             </span>
@@ -129,10 +129,10 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
 
         {/* -------- SATELLITE NODE 02: ARCHITECTURE -------- */}
         <motion.div
-          className="absolute top-[16%] right-[6%] sm:right-[10%] md:right-[12%] max-w-[280px] sm:max-w-[300px] pointer-events-none"
+          className="absolute top-[34%] left-4 right-auto w-[calc(100%-2rem)] sm:w-auto sm:top-[16%] sm:left-auto sm:right-[10%] md:right-[12%] max-w-[280px] sm:max-w-[300px] pointer-events-none"
           style={{ opacity: satelliteOpacity }}
         >
-          <div className="p-4 rounded-xl bg-black/70 border border-amber-500/25 backdrop-blur-sm">
+          <div className="p-3 sm:p-4 rounded-xl bg-black/70 border border-amber-500/25 backdrop-blur-sm">
             <span className="font-mono text-[10px] text-amber-400 tracking-wider uppercase font-semibold block mb-1">
               {portfolioData.identity.aboutNodes[1].eyebrow}
             </span>
@@ -145,10 +145,10 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
 
         {/* -------- SATELLITE NODE 03: AI & PIPELINES -------- */}
         <motion.div
-          className="absolute bottom-[8%] sm:bottom-[12%] left-1/2 -translate-x-1/2 max-w-[280px] sm:max-w-[380px] pointer-events-none"
+          className="absolute bottom-[5%] sm:bottom-[12%] left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-auto max-w-[280px] sm:max-w-[380px] pointer-events-none"
           style={{ opacity: satelliteOpacity }}
         >
-          <div className="p-4 rounded-xl bg-black/70 border border-emerald-500/25 backdrop-blur-sm">
+          <div className="p-3 sm:p-4 rounded-xl bg-black/70 border border-emerald-500/25 backdrop-blur-sm">
             <span className="font-mono text-[10px] text-emerald-400 tracking-wider uppercase font-semibold block mb-1">
               {portfolioData.identity.aboutNodes[2].eyebrow}
             </span>
@@ -167,7 +167,7 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
           via useTransform on the shared "bridge-container" element.
         */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-[62%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{
             opacity: gatewayBorderGlow,
             // Pointer events enabled so gateway is interactive before transition
@@ -176,7 +176,7 @@ export const Phase02AboutWall: React.FC<Props> = ({ isTransitioning }) => {
         >
           <div
             className="relative rounded-2xl overflow-hidden"
-            style={{ width: 340, height: 140 }}
+              style={{ width: "min(340px, calc(100vw - 32px))", height: 140 }}
           >
             {/* Glow border */}
             <div

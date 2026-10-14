@@ -27,13 +27,15 @@ slideshow of images.
 
 **Do NOT generate new artwork or request new image-generation assets.**
 
-For the current implementation phase, use **ONLY the four
+For the current implementation phase, use **ONLY the six
 already-provided/approved artwork frames** supplied by the user:
 
 1.  seated at laptop
-2.  standing from desk
-3.  walking toward wall
-4.  standing at thinking wall
+2.  almost standing at desk
+3.  standing from desk
+4.  arriving at the thinking wall
+5.  standing at thinking wall
+6.  sunset outro
 
 Treat these as the approved visual source material.
 
@@ -43,7 +45,7 @@ effects - use CSS/DOM overlays - use procedural/CSS/SVG elements - use
 real HTML UI
 
 You may NOT: - generate replacement images - invent additional AI
-artwork - silently replace the four approved frames - introduce random
+artwork - silently replace the six approved frames - introduce random
 stock images - introduce unrelated generated devices/environments
 
 If a future visual asset appears genuinely necessary, STOP and ask for
@@ -166,7 +168,7 @@ The animation architecture should be understandable and maintainable.
 The character should feel like a real person moving through the
 workspace.
 
-Use the four existing frames as the visual anchor.
+Use the six existing frames as the visual anchor.
 
 The first transition must make the following illusion:
 

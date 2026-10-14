@@ -56,8 +56,8 @@ export const portfolioData: PortfolioData = {
     { id: "about", number: "02", title: "About Me", range: [0.45, 0.62], activeInPhase1: true },
     { id: "projects", number: "03", title: "Projects", range: [0.62, 0.77], activeInPhase1: true },
     { id: "experience", number: "04", title: "Experience", range: [0.77, 0.88], activeInPhase1: true },
-    { id: "engineering", number: "05", title: "Engineering", range: [0.88, 0.94], activeInPhase1: true },
-    { id: "problem-solving", number: "06", title: "Problem Solving", range: [0.94, 0.98], activeInPhase1: true },
+    { id: "engineering", number: "05", title: "Engineering", range: [0.88, 0.935], activeInPhase1: true },
+    { id: "problem-solving", number: "06", title: "Problem Solving", range: [0.935, 0.98], activeInPhase1: true },
     { id: "connect", number: "07", title: "Connect", range: [0.98, 1.0], activeInPhase1: true },
   ],
 

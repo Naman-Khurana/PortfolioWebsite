@@ -170,7 +170,7 @@ The loop should feel like continuation, not a restart.
 
 ### Artwork
 
-Use only the existing four frames.
+Use only the existing six approved frames.
 
 No new image generation.
 
@@ -471,7 +471,7 @@ It should NOT feel like:
 
 For the initial version:
 
-> **USE ONLY THE FOUR PROVIDED ARTWORK FRAMES. NO NEW IMAGE
+> **USE ONLY THE SIX PROVIDED ARTWORK FRAMES. NO NEW IMAGE
 > GENERATION.**
 
 Any additional visual content must be created through:

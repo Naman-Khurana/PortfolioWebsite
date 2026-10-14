@@ -110,7 +110,7 @@ export const SoftwareConsole: React.FC = () => {
           The persistent anchor. Never changes structure — only the
           text content inside the breadcrumb segments morphs.
           ============================================================ */}
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/10 bg-white/[0.02] shrink-0">
+      <div className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3.5 border-b border-white/10 bg-white/[0.02] shrink-0">
         <div className="flex items-center gap-3">
           {/* Window Traffic Lights */}
           <div className="flex items-center gap-1.5">
@@ -196,7 +196,7 @@ export const SoftwareConsole: React.FC = () => {
         {/* ====================
             LEFT SIDEBAR
             ==================== */}
-        <div className="w-full lg:w-[320px] xl:w-[340px] border-b lg:border-b-0 lg:border-r border-white/10 bg-black/20 p-3 sm:p-4 flex flex-col shrink-0 overflow-hidden">
+        <div className="w-full h-[30%] lg:h-auto lg:w-[320px] xl:w-[340px] border-b lg:border-b-0 lg:border-r border-white/10 bg-black/20 p-2.5 sm:p-4 flex flex-col shrink-0 overflow-hidden">
           
           {/* Sidebar heading — morphs */}
           <div className="relative h-7 mb-2 flex items-center overflow-hidden">
@@ -219,7 +219,7 @@ export const SoftwareConsole: React.FC = () => {
             
             {/* PROJECTS LIST */}
             <motion.div
-              className="absolute inset-0 flex flex-col gap-2 overflow-y-auto"
+              className="absolute inset-0 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-hidden overflow-y-hidden lg:overflow-y-auto"
               style={prefersReducedMotion
                 ? {}
                 : { opacity: sidebarProjectListOpacity, y: sidebarProjectListY, pointerEvents: isInExperience ? "none" : "auto" }
@@ -231,7 +231,8 @@ export const SoftwareConsole: React.FC = () => {
                   <button
                     key={project.id}
                     onClick={() => setSelectedProjectId(project.id)}
-                    className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 border flex flex-col gap-1.5 ${
+                    aria-pressed={isSelected}
+                    className={`min-w-[calc(100%-0.5rem)] lg:min-w-0 w-full text-left p-2.5 sm:p-3.5 rounded-xl transition-all duration-200 border flex flex-col gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
                       isSelected
                         ? "bg-sky-500/15 border-sky-400/50 shadow-[0_0_20px_rgba(56,189,248,0.15)]"
                         : "bg-white/[0.02] border-white/5 hover:bg-white/[0.06] hover:border-white/15"
@@ -263,7 +264,7 @@ export const SoftwareConsole: React.FC = () => {
 
             {/* EXPERIENCE LIST */}
             <motion.div
-              className="absolute inset-0 flex flex-col gap-2 overflow-y-auto"
+              className="absolute inset-0 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-hidden overflow-y-hidden lg:overflow-y-auto"
               style={prefersReducedMotion
                 ? { opacity: 0 }
                 : {
@@ -276,7 +277,7 @@ export const SoftwareConsole: React.FC = () => {
               {portfolioData.experience.map((exp, index) => (
                 <div
                   key={exp.company}
-                  className="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.1)] flex flex-col gap-1.5"
+                  className="min-w-[calc(100%-0.5rem)] lg:min-w-0 p-2.5 sm:p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.1)] flex flex-col gap-1.5"
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-[10px] text-amber-400 font-semibold">ENV // 0{index + 1}</span>
@@ -290,7 +291,7 @@ export const SoftwareConsole: React.FC = () => {
                 </div>
               ))}
 
-              <div className="mt-3 p-3 rounded-lg border border-white/5 bg-white/[0.02]">
+              <div className="mt-0 min-w-[calc(100%-0.5rem)] lg:mt-3 lg:min-w-0 p-3 rounded-lg border border-white/5 bg-white/[0.02]">
                 <div className="text-[10px] font-mono text-white/40 uppercase mb-1">Production Domain</div>
                 <div className="text-xs text-white/70">Fleet Telematics, Geospatial Ingestion, Low-Latency REST APIs</div>
               </div>
@@ -314,7 +315,7 @@ export const SoftwareConsole: React.FC = () => {
         >
           {/* PROJECT INSPECTOR (FULL-WIDTH 2-COLUMN VIEWPORT PARTICIPATION) */}
           <motion.div
-            className="absolute inset-0 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col"
+              className="absolute inset-0 overflow-y-auto p-3 sm:p-6 md:p-8 flex flex-col"
             style={prefersReducedMotion
               ? {}
               : { opacity: mainProjectOpacity, y: mainProjectY, pointerEvents: isInExperience ? "none" : "auto" }
@@ -536,15 +537,15 @@ export const SoftwareConsole: React.FC = () => {
 
             </div>
 
-            <div className="mt-auto pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/40 shrink-0">
-              <span>ENVIRONMENT: INTERACTIVE // SELECT SYSTEMS ON LEFT</span>
-              <span>NAMAN KHURANA PORTFOLIO</span>
+            <div className="mt-auto pt-3 border-t border-white/10 flex items-center justify-between gap-3 text-[10px] sm:text-xs font-mono text-white/40 shrink-0">
+              <span className="min-w-0 truncate">ENVIRONMENT: INTERACTIVE // SELECT SYSTEMS ON LEFT</span>
+              <span className="hidden shrink-0 sm:inline">NAMAN KHURANA PORTFOLIO</span>
             </div>
           </motion.div>
 
           {/* EXPERIENCE INSPECTOR */}
           <motion.div
-            className="absolute inset-0 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col"
+            className="absolute inset-0 overflow-y-auto p-3 sm:p-6 md:p-8 flex flex-col"
             style={prefersReducedMotion
               ? { opacity: 0 }
               : { opacity: mainExperienceOpacity, y: mainExperienceY, pointerEvents: isInExperience ? "auto" : "none" }

@@ -32,7 +32,7 @@ export const Phase07Connect: React.FC = () => {
     ["20px", "0px", "0px"]
   );
 
-  const isVisible = currentProgress >= 0.978;
+  const isVisible = currentProgress >= 0.98;
   const { contact, identity } = portfolioData;
 
   const handleCopyEmail = async () => {
@@ -58,13 +58,16 @@ export const Phase07Connect: React.FC = () => {
         Content is constrained to the LEFT half of the image (character is on the right).
         We use absolute positioning so it doesn't affect the image layer.
       */}
-      <div className="absolute inset-0 flex items-center">
+      <div
+        className="absolute inset-0 overflow-y-auto flex items-start pb-3 pt-20 sm:overflow-visible sm:items-center sm:pb-0 sm:pt-0"
+        style={{ pointerEvents: isVisible ? "auto" : "none" }}
+      >
         <div
           className="
-            flex flex-col gap-5 pointer-events-auto
-            ml-12 sm:ml-16 md:ml-20 lg:ml-24
+            flex flex-col gap-3 sm:gap-5
+            mx-4 sm:mx-0 sm:ml-16 md:ml-20 lg:ml-24
             mr-auto
-            max-w-[420px] sm:max-w-[460px] md:max-w-[500px]
+            max-w-none sm:max-w-[460px] md:max-w-[500px]
             px-0
           "
         >
@@ -86,7 +89,7 @@ export const Phase07Connect: React.FC = () => {
 
           {/* Headline */}
           <div className="space-y-2">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_16px_rgba(0,0,0,0.95)] leading-[1.15]">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_16px_rgba(0,0,0,0.95)] leading-[1.15]">
               {contact.tagline}
             </h2>
             <p className="text-xs sm:text-sm text-white/75 leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
@@ -132,20 +135,15 @@ export const Phase07Connect: React.FC = () => {
             </div>
 
             {/* Resume */}
-            <div className="p-3 rounded-xl border border-white/12 bg-black/60 backdrop-blur-xl hover:border-sky-400/50 transition-all duration-300 shadow-xl flex flex-col justify-between gap-2">
+            <a href={contact.resumeUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-white/12 bg-black/60 backdrop-blur-xl hover:border-sky-400/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 transition-all duration-300 shadow-xl flex flex-col justify-between gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-[9px] font-mono uppercase text-white/40 tracking-wider">RÉSUMÉ</span>
                 <span className="text-sky-400 text-[9px] font-mono font-bold">PDF</span>
               </div>
-              <a
-                href={contact.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-1.5 px-2.5 rounded-lg bg-sky-400/20 hover:bg-sky-400/35 text-sky-300 border border-sky-400/30 text-[10px] font-mono font-bold transition-all flex items-center justify-center gap-1.5"
-              >
+              <span className="py-1.5 px-2.5 rounded-lg bg-sky-400/20 hover:bg-sky-400/35 text-sky-300 border border-sky-400/30 text-[10px] font-mono font-bold transition-all flex items-center justify-center gap-1.5">
                 <span>VIEW ↓</span>
-              </a>
-            </div>
+              </span>
+            </a>
 
             {/* LinkedIn */}
             <a

@@ -421,7 +421,7 @@ export const TheWalkTransition: React.FC = () => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+            className="object-cover object-[62%_center] sm:object-center pointer-events-none select-none"
           />
         </motion.div>
 
@@ -440,7 +440,7 @@ export const TheWalkTransition: React.FC = () => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+            className="object-cover object-[62%_center] sm:object-center pointer-events-none select-none"
           />
         </motion.div>
 
@@ -465,7 +465,7 @@ export const TheWalkTransition: React.FC = () => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+            className="object-cover object-[62%_center] sm:object-center pointer-events-none select-none"
           />
         </motion.div>
 
@@ -488,7 +488,7 @@ export const TheWalkTransition: React.FC = () => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+            className="object-cover object-[58%_center] sm:object-center pointer-events-none select-none"
           />
         </motion.div>
 
@@ -515,7 +515,7 @@ export const TheWalkTransition: React.FC = () => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+            className="object-cover object-[58%_center] sm:object-center pointer-events-none select-none"
           />
         </motion.div>
 
@@ -534,7 +534,7 @@ export const TheWalkTransition: React.FC = () => {
             fill
             priority={false}
             sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+            className="object-cover object-[60%_center] sm:object-center pointer-events-none select-none"
           />
         </motion.div>
 

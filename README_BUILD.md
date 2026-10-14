@@ -14,7 +14,7 @@ Engineer's Journey**.
 
 ## Current artwork policy
 
-Only the four existing approved frames are allowed for the initial
+Only the six existing approved frames are allowed for the initial
 version.
 
 **No new image generation.**
@@ -22,7 +22,7 @@ version.
 ## Recommended workflow
 
 1.  Copy these files into the portfolio repository root.
-2.  Ensure the four existing artwork files are in the repository.
+2.  Ensure the six existing artwork files are in the repository.
 3.  Give the coding agent the contents of `BUILD_PROMPT.md`.
 4.  The agent must first inspect the repo and stop for approval.
 5.  Approve foundation.

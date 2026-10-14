@@ -19,51 +19,55 @@ interface TimelineContextType {
 const TimelineContext = createContext<TimelineContextType | null>(null);
 
 /**
- * READING PLATEAU ARCHITECTURE
+ * BALANCED STORY TIMELINE
  *
- * Raw scroll (0→1) is remapped to "story time" (0→1) so that
- * certain raw-scroll ranges produce a very small story-time change —
- * giving the reader a wide, stable window where everything is frozen.
+ * Raw scroll (0→1) is remapped to story time (0→1). This redistributes
+ * scroll distance across narrative phases while preserving their existing
+ * story-time animation keyframes.
  *
  * Reading plateaus:
- *   Phase 03 Projects   raw 0.62 → 0.72 maps to story 0.64 → 0.65  (10% raw = 1% story)
- *   Phase 04 Experience raw 0.77 → 0.85 maps to story 0.78 → 0.79  (8%  raw = 1% story)
- *   Phase 05 Engineering raw 0.895 → 0.925 maps to story 0.895 → 0.910
- *   Phase 06 Problem Solving raw 0.940 → 0.975 maps to story 0.950 → 0.965 (3.5% raw = 1.5% story)
+ *   Projects   raw 0.30 → 0.34 maps to story 0.62 → 0.65
+ *   Experience raw 0.42 → 0.45 maps to story 0.77 → 0.795
+ *   Engineering raw 0.53 → 0.57 maps to story 0.895 → 0.910
+ *   Problem Solving raw 0.65 → 0.75 maps to story 0.945 → 0.965
  *
- * Outside plateaus the mapping is roughly linear (story advances normally).
+ * Outside reading windows, story time advances through the phase transitions.
  *
  * Raw input breakpoints  →  Story output breakpoints
  */
 const RAW_INPUTS = [
   0.00,
-  0.62,  // Projects console fully open — begin plateau
-  0.72,  // End of Projects reading plateau
-  0.745, // 03→04 crossover begins
-  0.77,  // Experience begins — begin plateau
-  0.85,  // End of Experience reading plateau
-  0.865, // 04→05 crossover begins
-  0.895, // Engineering stable begins — begin plateau
-  0.925, // End of Engineering reading plateau
-  0.940, // Problem Solving reveal begins
-  0.970, // End of Problem Solving reading plateau
-  0.982, // Phase 06→07 crossover completes
+  0.18,  // Introduction completes
+  0.30,  // About completes / Projects begin
+  0.34,  // Projects reading window completes
+  0.40,  // Projects→Experience crossover begins
+  0.42,  // Experience begins
+  0.45,  // Experience reading window completes
+  0.51,  // Experience→Engineering crossover begins
+  0.53,  // Engineering begins
+  0.57,  // Engineering reading window completes
+  0.62,  // Problem Solving entrance begins
+  0.65,  // Problem Solving reading window begins
+  0.75,  // End of extended Problem Solving reading window
+  0.81,  // Phase 06→07 crossover completes
   1.00,  // End of Phase 07 Connect reading plateau
 ] as const;
 
 const STORY_OUTPUTS = [
   0.00,
-  0.62,  // story matches raw up to Projects open
-  0.65,  // plateau: 10% raw → 0.03 story progress (reading window)
-  0.745, // fast advance through the crossover
-  0.77,  // story matches raw at Experience start
-  0.795, // plateau: 8% raw → 0.025 story progress (reading window)
-  0.865, // fast advance through 04→05 crossover
-  0.895, // story matches raw at Engineering start
-  0.910, // plateau: 3% raw → 0.015 story progress (reading window)
-  0.945, // fast advance through 05→06 crossover
-  0.965, // plateau: 3% raw → 0.020 story progress (reading window)
-  0.985, // fast advance through 06→07 crossover
+  0.45,
+  0.62,
+  0.65,
+  0.745,
+  0.77,
+  0.795,
+  0.865,
+  0.895,
+  0.910,
+  0.930,
+  0.945,
+  0.965,
+  0.985,
   1.00,  // Connect reading plateau (story 0.985 -> 1.00)
 ] as const;
 

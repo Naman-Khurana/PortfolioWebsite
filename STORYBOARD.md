@@ -18,23 +18,31 @@ The environment changes because something happens.
 
 # Existing Visual Assets
 
-The user has already approved four artwork frames:
+The user has already approved six artwork frames:
 
 ### Frame A --- Seated
 
 Engineer sitting at desk with laptop and AirPods Max.
 
-### Frame B --- Standing
+### Frame B --- Almost standing
+
+Engineer rising from the desk.
+
+### Frame C --- Standing
 
 Engineer has stood up from the desk.
 
-### Frame C --- Walking
+### Frame D --- Wall arrival
 
-Engineer walking toward the thinking wall.
+Engineer arrives at the thinking wall.
 
-### Frame D --- Wall
+### Frame E --- Wall
 
 Engineer has reached the thinking wall.
+
+### Frame F --- Outro
+
+Engineer stands at the window overlooking the city at sunset.
 
 These are the only supplied artwork frames currently available.
 

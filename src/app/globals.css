@@ -13,6 +13,12 @@
   padding: 0;
 }
 
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(125, 211, 252, 0.9);
+  outline-offset: 3px;
+}
+
 html,
 body {
   background-color: var(--background);
@@ -21,6 +27,21 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Keep fixed cinematic layers stable while mobile browser chrome expands or
+   collapses. Desktop continues to use its original viewport behavior. */
+@supports (height: 100dvh) {
+  @media (max-width: 639px) {
+    html {
+      min-height: 100svh;
+    }
+
+    body {
+      min-height: 100dvh;
+      overscroll-behavior-y: none;
+    }
+  }
 }
 
 /* Custom discreet scrollbar for cinematic feel */
@@ -39,4 +60,14 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #30363d;
+}
+
+@media (max-width: 639px) {
+  .phase06-node-first {
+    left: 22% !important;
+  }
+
+  .phase06-node-last {
+    left: 78% !important;
+  }
 }

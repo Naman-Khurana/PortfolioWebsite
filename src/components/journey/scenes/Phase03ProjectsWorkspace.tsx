@@ -37,7 +37,7 @@ export const Phase03ProjectsWorkspace: React.FC = () => {
 
   return (
     <motion.div
-      className="absolute inset-0 z-30 flex items-center justify-center p-3 sm:p-6 md:p-10 pointer-events-none"
+      className="absolute inset-0 z-30 flex items-center justify-center px-3 pt-20 pb-2 sm:p-6 md:p-10 pointer-events-none"
       style={{
         opacity: workspaceOpacity,
         scale: prefersReducedMotion ? 1 : workspaceScale,
@@ -45,7 +45,7 @@ export const Phase03ProjectsWorkspace: React.FC = () => {
       }}
     >
       {/* Main Software Console Frame */}
-      <div className="relative w-full max-w-[1360px] h-[88vh] max-h-[820px] bg-[#0c1017]/95 border border-white/15 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl flex flex-col overflow-hidden pointer-events-auto">
+      <div className="relative w-full max-w-[1360px] h-[calc(100dvh-5.25rem)] max-h-none sm:h-[88vh] sm:max-h-[820px] bg-[#0c1017]/95 border border-white/15 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl flex flex-col overflow-hidden pointer-events-auto">
         
         {/* Console Header Bar */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/10 bg-white/[0.02]">
@@ -94,7 +94,8 @@ export const Phase03ProjectsWorkspace: React.FC = () => {
                 <button
                   key={project.id}
                   onClick={() => setSelectedProjectId(project.id)}
-                  className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 border flex flex-col gap-1.5 ${
+                  aria-pressed={isSelected}
+                  className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 border flex flex-col gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
                     isSelected
                       ? "bg-sky-500/15 border-sky-400/50 shadow-[0_0_20px_rgba(56,189,248,0.15)]"
                       : "bg-white/[0.02] border-white/5 hover:bg-white/[0.06] hover:border-white/15"

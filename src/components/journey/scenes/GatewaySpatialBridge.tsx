@@ -126,7 +126,7 @@ export const GatewaySpatialBridge: React.FC = () => {
 
         {/* Unified Scenes Container */}
         <motion.div
-          className="absolute inset-0 p-2 sm:p-4 md:p-6"
+          className="absolute inset-0 p-2 pt-20 sm:p-4 md:p-6"
           style={{
             opacity: innerOpacity,
             pointerEvents: "auto",

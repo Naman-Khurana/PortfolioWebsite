@@ -132,7 +132,7 @@ export const Phase06ProblemSolving: React.FC = () => {
           HUD TOP BAR
           ============================================================ */}
       <motion.div
-        className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/10 bg-white/[0.02] shrink-0"
+        className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3.5 border-b border-white/10 bg-white/[0.02] shrink-0"
         style={prefersReducedMotion ? {} : { opacity: headerOpacity }}
       >
         <div className="flex items-center gap-3">
@@ -140,7 +140,8 @@ export const Phase06ProblemSolving: React.FC = () => {
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
             <span className="font-mono text-xs text-emerald-300 font-semibold tracking-wider">
-              ALGORITHMIC_GRAPH // REASONING & PROOF
+              <span className="hidden min-[380px]:inline">ALGORITHMIC_GRAPH // REASONING & PROOF</span>
+              <span className="min-[380px]:hidden">ALGORITHMIC_GRAPH</span>
             </span>
           </div>
 
@@ -157,7 +158,7 @@ export const Phase06ProblemSolving: React.FC = () => {
             <span>HEURISTICS: LOADED</span>
           </div>
           <span className="text-white/20 hidden md:inline">|</span>
-          <span className="text-purple-400 font-medium">PHASE 06 // PROBLEM SOLVING</span>
+          <span className="hidden sm:inline text-purple-400 font-medium">PHASE 06 // PROBLEM SOLVING</span>
         </div>
       </motion.div>
 
@@ -165,13 +166,13 @@ export const Phase06ProblemSolving: React.FC = () => {
           MAIN VIEWPORT: Left = Algorithmic Graph, Right = Verified Evidence
           ============================================================ */}
       <motion.div
-        className="flex-1 p-3 sm:p-5 md:p-6 overflow-hidden flex flex-col lg:flex-row gap-5 min-h-0"
+        className="flex-1 p-3 sm:p-5 md:p-6 overflow-y-auto lg:overflow-hidden overscroll-contain flex flex-col lg:flex-row gap-5 min-h-0"
         style={prefersReducedMotion ? {} : { opacity: contentOpacity }}
       >
         {/* ============================================================
             LEFT COLUMN: ALGORITHMIC GRAPH & DSA HEURISTICS
             ============================================================ */}
-        <div className="flex-1 flex flex-col gap-3 min-h-0">
+        <div className="flex-1 min-h-[520px] lg:min-h-0 flex flex-col gap-3 shrink-0">
 
           {/* Graph Title & Description */}
           <div className="flex items-center justify-between">
@@ -190,7 +191,7 @@ export const Phase06ProblemSolving: React.FC = () => {
           </div>
 
           {/* SVG Graph Canvas */}
-          <div className="relative flex-1 rounded-xl bg-black/60 border border-white/10 overflow-hidden flex items-center justify-center min-h-[220px]">
+          <div className="relative flex-1 rounded-xl bg-black/60 border border-white/10 overflow-hidden flex items-center justify-center min-h-[220px] sm:min-h-[260px]">
             {/* Grid texture */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] [background-size:24px_24px]" />
 
@@ -251,22 +252,22 @@ export const Phase06ProblemSolving: React.FC = () => {
                 <button
                   key={node.id}
                   onClick={() => setSelectedNode(idx)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 group text-left cursor-pointer focus:outline-none"
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 group text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-xl ${idx === 0 ? "phase06-node-first" : idx === 3 ? "phase06-node-last" : ""}`}
                   style={{ left: `${leftPct}%`, top: `${topPct}%` }}
                 >
                   <div
-                    className={`px-3 py-2 rounded-xl border backdrop-blur-xl transition-all duration-300 flex flex-col items-center gap-0.5 ${isSelected
+                    className={`px-1.5 py-2 sm:px-3 rounded-xl border backdrop-blur-xl transition-all duration-300 flex flex-col items-center gap-0.5 max-w-[112px] sm:max-w-none ${isSelected
                         ? `${node.border} ${node.bgActive} ${node.glow} scale-110 ring-2 ring-white/30`
                         : "border-white/10 bg-black/80 hover:border-white/30 hover:scale-105"
                       }`}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className={`w-2 h-2 rounded-full ${node.accent} ${isSelected ? "animate-ping" : ""}`} />
-                      <span className={`font-mono text-[9px] font-bold ${node.color}`}>
+                      <span className={`font-mono text-[8px] sm:text-[9px] font-bold text-center leading-tight ${node.color}`}>
                         {node.badge}
                       </span>
                     </div>
-                    <span className="text-[10px] font-semibold text-white tracking-tight whitespace-nowrap">
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-white tracking-tight text-center leading-tight">
                       {node.label.split("//")[0]}
                     </span>
                   </div>
@@ -314,7 +315,7 @@ export const Phase06ProblemSolving: React.FC = () => {
         {/* ============================================================
             RIGHT COLUMN: VERIFIED TELEMETRY EVIDENCE MODULES
             ============================================================ */}
-        <div className="w-full lg:w-[460px] xl:w-[500px] flex flex-col gap-3 shrink-0 overflow-y-auto pr-1">
+        <div className="w-full lg:w-[460px] xl:w-[500px] flex flex-col gap-3 shrink-0 overflow-visible lg:overflow-y-auto pr-1">
 
           <div className="flex items-center justify-between">
             <div>
@@ -348,9 +349,12 @@ export const Phase06ProblemSolving: React.FC = () => {
                   : "hover:border-purple-500/40";
 
               return (
-                <div
+                <a
                   key={platform.id}
-                  className={`p-3.5 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md transition-all duration-300 ${borderTheme} flex flex-col gap-2 group`}
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p-3.5 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${borderTheme} flex flex-col gap-2 group`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -365,15 +369,10 @@ export const Phase06ProblemSolving: React.FC = () => {
                       )}
                     </div>
 
-                    <a
-                      href={platform.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-[10px] text-sky-400 hover:text-sky-300 flex items-center gap-1 transition-colors group-hover:translate-x-0.5"
-                    >
+                    <span className="font-mono text-[10px] text-sky-400 flex items-center gap-1 transition-colors group-hover:translate-x-0.5">
                       <span>VIEW PROFILE</span>
                       <span>↗</span>
-                    </a>
+                    </span>
                   </div>
 
                   <div className="flex items-center justify-between text-xs font-mono">
@@ -400,7 +399,7 @@ export const Phase06ProblemSolving: React.FC = () => {
                       ))}
                     </div>
                   )}
-                </div>
+                </a>
               );
             })}
           </div>
