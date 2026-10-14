@@ -222,7 +222,7 @@ export const Phase05Engineering: React.FC = () => {
           MAIN ASYMMETRIC VIEWPORT: Left = Specs, Right = Topology SVG
           ============================================================ */}
       <motion.div
-        className="flex-1 p-3 sm:p-5 md:p-6 overflow-y-auto lg:overflow-hidden overscroll-contain flex flex-col lg:flex-row gap-5 min-h-0"
+        className="flex-1 p-3 sm:p-5 md:p-6 overflow-y-auto lg:overflow-hidden overscroll-auto flex flex-col lg:flex-row gap-5 min-h-0"
         style={prefersReducedMotion ? {} : { opacity: contentOpacity }}
       >
         {/* ============================================================

@@ -315,7 +315,7 @@ export const SoftwareConsole: React.FC = () => {
         >
           {/* PROJECT INSPECTOR (FULL-WIDTH 2-COLUMN VIEWPORT PARTICIPATION) */}
           <motion.div
-              className="absolute inset-0 overflow-y-auto p-3 sm:p-6 md:p-8 flex flex-col"
+              className="absolute inset-0 overflow-y-auto overscroll-auto p-3 sm:p-6 md:p-8 flex flex-col"
             style={prefersReducedMotion
               ? {}
               : { opacity: mainProjectOpacity, y: mainProjectY, pointerEvents: isInExperience ? "none" : "auto" }
@@ -545,7 +545,7 @@ export const SoftwareConsole: React.FC = () => {
 
           {/* EXPERIENCE INSPECTOR */}
           <motion.div
-            className="absolute inset-0 overflow-y-auto p-3 sm:p-6 md:p-8 flex flex-col"
+            className="absolute inset-0 overflow-y-auto overscroll-auto p-3 sm:p-6 md:p-8 flex flex-col"
             style={prefersReducedMotion
               ? { opacity: 0 }
               : { opacity: mainExperienceOpacity, y: mainExperienceY, pointerEvents: isInExperience ? "auto" : "none" }
