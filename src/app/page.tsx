@@ -5,6 +5,7 @@ import { TimelineProvider } from "@/context/TimelineContext";
 import { CinematicViewport } from "@/components/journey/CinematicViewport";
 import { TheWalkTransition } from "@/components/journey/scenes/TheWalkTransition";
 import { MobileNavigation } from "@/components/navigation/MobileNavigation";
+import { DesktopExperienceHint } from "@/components/navigation/DesktopExperienceHint";
 import { SideNavigation } from "@/components/navigation/SideNavigation";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         {/* Global UI Overlays */}
         <SideNavigation />
         <MobileNavigation />
+        <DesktopExperienceHint />
 
         {/* 
           Scroll Track Runway:
