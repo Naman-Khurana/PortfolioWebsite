@@ -16,6 +16,7 @@ export interface ProjectItem {
   };
   link?: string;
   github?: string;
+  live?: string;
 }
 
 export interface ExperienceItem {

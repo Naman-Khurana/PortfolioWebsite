@@ -327,7 +327,7 @@ export const SoftwareConsole: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                 <span>{activeProject.role}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <a
                   href={activeProject.github}
                   target="_blank"
@@ -337,6 +337,17 @@ export const SoftwareConsole: React.FC = () => {
                   <span>VIEW SOURCE // GITHUB</span>
                   <span>↗</span>
                 </a>
+                {activeProject.live && (
+                  <a
+                    href={activeProject.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-400/10 hover:bg-emerald-400/15 border border-emerald-300/25 text-xs font-mono text-emerald-200 transition-all"
+                  >
+                    <span>OPEN LIVE</span>
+                    <span>↗</span>
+                  </a>
+                )}
               </div>
             </div>
 

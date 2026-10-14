@@ -158,15 +158,28 @@ export const Phase03ProjectsWorkspace: React.FC = () => {
                       <span>{activeProject.role}</span>
                     </div>
 
-                    <a
-                      href={activeProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono text-white transition-all"
-                    >
-                      <span>VIEW SOURCE // GITHUB</span>
-                      <span>↗</span>
-                    </a>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <a
+                        href={activeProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono text-white transition-all"
+                      >
+                        <span>VIEW SOURCE // GITHUB</span>
+                        <span>↗</span>
+                      </a>
+                      {activeProject.live && (
+                        <a
+                          href={activeProject.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-emerald-400/10 hover:bg-emerald-400/15 border border-emerald-300/25 text-xs font-mono text-emerald-200 transition-all"
+                        >
+                          <span>OPEN LIVE</span>
+                          <span>↗</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight mb-2">
