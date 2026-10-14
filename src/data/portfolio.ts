@@ -67,6 +67,50 @@ export const portfolioData: PortfolioData = {
   // "// TECH TOPOLOGY" panel for that project.
   // ================================================================
   projects: [
+
+    {
+      id: "domain-live",
+      title: "Domain Live",
+      role: "Backend Engineer / System Architect",
+      tagline: "Near-real-time domain discovery & analytics platform",
+      description:
+        "A near-real-time domain analytics platform built with Spring Boot, Flask, and Next.js. It processes discovered domains, validates registration metadata through RDAP, segments domain names into keywords, and serves precomputed analytics through a live dashboard.",
+      technologies: [
+        "Java",
+        "Spring Boot",
+        "Hibernate/JPA",
+        "Python",
+        "Flask",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Redis",
+        "Docker Compose",
+      ],
+      metrics: [
+        "8-second analytics snapshots",
+        "Batch processing of 100 domains",
+        "Three independently deployable services",
+      ],
+      focus:
+        "Decoupled ingestion and keyword processing through a PENDING → PARSED pipeline, with batched background workers and precomputed analytics using JPQL aggregates and composite indexes.",
+      reliability:
+        "Bounded ingestion queues, controlled RDAP concurrency, PostgreSQL JSONB snapshots, and Redis caching. Uses best-effort certificate discovery rather than a complete domain-registration feed.",
+      topology: {
+        title: "INGESTION & ANALYTICS FLOW",
+        sourceLabel: "SPRING_BOOT // DOMAIN_PIPELINE",
+        statusLabel: "SNAPSHOTS: 8S",
+        details: [
+          "CertStream + RDAP Validation",
+          "Spring Boot + PostgreSQL",
+          "Flask Keyword Segmentation",
+          "Redis Cache + Next.js Dashboard",
+        ],
+      },
+      github:
+        "https://github.com/naman-khurana/DomainRegistrationLiveDashboard",
+      // live: "http://34.131.132.117/",
+    },
     {
       id: "wealth-tracker",
       title: "Wealth Tracker",
@@ -244,7 +288,7 @@ export const portfolioData: PortfolioData = {
     email: "namankhurana.dev@gmail.com",
     github: "https://www.github.com/naman-khurana",
     linkedin: "https://www.linkedin.com/in/naman-khurana-a444a6204/",
-    resumeUrl: "/resume.pdf",
+    resumeUrl: "https://drive.google.com/file/d/1xvJBFHhOQNIlHc74ScHwu2ihjma_rfmm/view?usp=sharing",
     tagline: "Let's build something amazing.",
     introduction: "Architecting high-throughput backends, scalable APIs, and distributed systems. Let's build together.",
   },
