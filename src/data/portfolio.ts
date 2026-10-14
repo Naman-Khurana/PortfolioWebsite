@@ -109,7 +109,7 @@ export const portfolioData: PortfolioData = {
       },
       github:
         "https://github.com/naman-khurana/DomainRegistrationLiveDashboard",
-      // live: "http://34.131.132.117/",
+      live: "http://34.131.132.117/",
     },
     {
       id: "wealth-tracker",
