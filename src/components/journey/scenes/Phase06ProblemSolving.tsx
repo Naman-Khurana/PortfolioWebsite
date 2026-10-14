@@ -20,10 +20,11 @@
 import React, { useState } from "react";
 import { motion, useTransform } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { useTimeline } from "@/context/TimelineContext";
+import { usePhaseScrollActive, useTimeline } from "@/context/TimelineContext";
 
 export const Phase06ProblemSolving: React.FC = () => {
-  const { scrollProgress, prefersReducedMotion, currentProgress } = useTimeline();
+  const { scrollProgress, prefersReducedMotion } = useTimeline();
+  const isInteractive = usePhaseScrollActive("problemSolving");
   const [selectedNode, setSelectedNode] = useState<number>(0);
 
   // ================================================================
@@ -54,7 +55,6 @@ export const Phase06ProblemSolving: React.FC = () => {
     [320, 0]
   );
 
-  const isInteractive = currentProgress >= 0.935 && currentProgress < 0.972;
   const problemData = portfolioData.problemSolving;
 
   // Graph nodes representation (The Thinking Architecture)

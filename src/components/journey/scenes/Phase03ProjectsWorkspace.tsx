@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { motion, useTransform, AnimatePresence } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { useTimeline } from "@/context/TimelineContext";
+import { usePhaseScrollActive, useTimeline } from "@/context/TimelineContext";
 
 export const Phase03ProjectsWorkspace: React.FC = () => {
   const { scrollProgress, prefersReducedMotion } = useTimeline();
+  const isScrollActive = usePhaseScrollActive("projectsWorkspace");
   const [selectedProjectId, setSelectedProjectId] = useState<string>(
     portfolioData.projects[0].id
   );
@@ -45,7 +46,10 @@ export const Phase03ProjectsWorkspace: React.FC = () => {
       }}
     >
       {/* Main Software Console Frame */}
-      <div className="relative w-full max-w-[1360px] h-[calc(100dvh-5.25rem)] max-h-none sm:h-[88vh] sm:max-h-[820px] bg-[#0c1017]/95 border border-white/15 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl flex flex-col overflow-hidden pointer-events-auto">
+      <div
+        className="relative w-full max-w-[1360px] h-[calc(100dvh-5.25rem)] max-h-none sm:h-[88vh] sm:max-h-[820px] bg-[#0c1017]/95 border border-white/15 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl flex flex-col overflow-hidden"
+        style={{ pointerEvents: isScrollActive ? "auto" : "none" }}
+      >
         
         {/* Console Header Bar */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/10 bg-white/[0.02]">

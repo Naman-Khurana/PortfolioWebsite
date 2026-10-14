@@ -36,7 +36,7 @@
 import React, { useMemo, useState } from "react";
 import { motion, useTransform } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { useTimeline } from "@/context/TimelineContext";
+import { usePhaseScrollActive, useTimeline } from "@/context/TimelineContext";
 
 // ================================================================
 // COLOR PALETTE — cycles automatically, so any number of tiers works.
@@ -143,7 +143,8 @@ function buildTierThemes(skills: SkillGroup[]) {
 }
 
 export const Phase05Engineering: React.FC = () => {
-  const { scrollProgress, prefersReducedMotion, currentProgress } = useTimeline();
+  const { scrollProgress, prefersReducedMotion } = useTimeline();
+  const isInteractive = usePhaseScrollActive("engineering");
   const [activeTier, setActiveTier] = useState<number>(0);
 
   const skills = portfolioData.skills as SkillGroup[];
@@ -172,8 +173,6 @@ export const Phase05Engineering: React.FC = () => {
   const contentOpacity = useTransform(scrollProgress, [0.885, 0.9], [0, 1]);
 
   const currentTheme = tierThemes[activeTier] || tierThemes[0];
-  const isInteractive = currentProgress >= 0.88 && currentProgress < 0.935;
-
   return (
     <motion.div
       className="relative w-full h-full rounded-2xl border border-white/15 bg-[#0a0e17]/85 backdrop-blur-xl shadow-[0_0_70px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden"

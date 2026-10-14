@@ -15,10 +15,11 @@
 import React, { useState } from "react";
 import { motion, useTransform } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { useTimeline } from "@/context/TimelineContext";
+import { usePhaseScrollActive, useTimeline } from "@/context/TimelineContext";
 
 export const Phase07Connect: React.FC = () => {
-  const { scrollProgress, currentProgress, prefersReducedMotion, scrollToProgress } = useTimeline();
+  const { scrollProgress, prefersReducedMotion, scrollToProgress } = useTimeline();
+  const isScrollActive = usePhaseScrollActive("connect");
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const containerOpacity = useTransform(
@@ -32,7 +33,7 @@ export const Phase07Connect: React.FC = () => {
     ["20px", "0px", "0px"]
   );
 
-  const isVisible = currentProgress >= 0.98;
+  const isVisible = isScrollActive;
   const { contact, identity } = portfolioData;
 
   const handleCopyEmail = async () => {

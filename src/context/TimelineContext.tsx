@@ -16,6 +16,22 @@ interface TimelineContextType {
   scrollToProgress: (target: number) => void;
 }
 
+/**
+ * Content scroll is enabled only during the stable, fully visible portion of
+ * each phase. The upper bound is the first frame of its exit transition.
+ */
+export const PHASE_SCROLL_WINDOWS = {
+  aboutWall: [0.49, 0.54],
+  projectsWorkspace: [0.65, 0.78],
+  projectsConsole: [0.65, 0.745],
+  experience: [0.785, 0.865],
+  engineering: [0.9, 0.925],
+  problemSolving: [0.95, 0.96],
+  connect: [0.99, 1.001],
+} as const;
+
+export type ScrollablePhase = keyof typeof PHASE_SCROLL_WINDOWS;
+
 const TimelineContext = createContext<TimelineContextType | null>(null);
 
 /**
@@ -146,4 +162,10 @@ export function useTimeline(): TimelineContextType {
     throw new Error("useTimeline must be used within a TimelineProvider");
   }
   return context;
+}
+
+export function usePhaseScrollActive(phase: ScrollablePhase): boolean {
+  const { currentProgress } = useTimeline();
+  const [start, end] = PHASE_SCROLL_WINDOWS[phase];
+  return currentProgress >= start && currentProgress < end;
 }

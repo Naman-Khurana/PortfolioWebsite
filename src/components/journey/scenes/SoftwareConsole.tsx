@@ -23,10 +23,12 @@
 import React, { useState } from "react";
 import { motion, useTransform } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { useTimeline } from "@/context/TimelineContext";
+import { usePhaseScrollActive, useTimeline } from "@/context/TimelineContext";
 
 export const SoftwareConsole: React.FC = () => {
-  const { scrollProgress, prefersReducedMotion, currentProgress } = useTimeline();
+  const { scrollProgress, prefersReducedMotion } = useTimeline();
+  const isProjectScrollActive = usePhaseScrollActive("projectsConsole");
+  const isExperienceScrollActive = usePhaseScrollActive("experience");
   const [selectedProjectId, setSelectedProjectId] = useState<string>(portfolioData.projects[0].id);
   const [activeProjectTab, setActiveProjectTab] = useState<"architecture" | "metrics" | "stack">("architecture");
 
@@ -88,8 +90,7 @@ export const SoftwareConsole: React.FC = () => {
   const consoleY = useTransform(scrollProgress, [0.865, 0.895], ["0px", "-10px"]);
 
   // Pointer events: active during 0.62 - 0.88
-  const isConsoleInteractive = currentProgress >= 0.62 && currentProgress < 0.88;
-  const isInExperience = currentProgress >= 0.77;
+  const isConsoleInteractive = isProjectScrollActive || isExperienceScrollActive;
 
   return (
     <motion.div
@@ -221,8 +222,8 @@ export const SoftwareConsole: React.FC = () => {
             <motion.div
               className="absolute inset-0 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-hidden overflow-y-hidden lg:overflow-y-auto"
               style={prefersReducedMotion
-                ? {}
-                : { opacity: sidebarProjectListOpacity, y: sidebarProjectListY, pointerEvents: isInExperience ? "none" : "auto" }
+                ? { pointerEvents: isProjectScrollActive ? "auto" : "none" }
+                : { opacity: sidebarProjectListOpacity, y: sidebarProjectListY, pointerEvents: isProjectScrollActive ? "auto" : "none" }
               }
             >
               {portfolioData.projects.map((project, index) => {
@@ -266,11 +267,11 @@ export const SoftwareConsole: React.FC = () => {
             <motion.div
               className="absolute inset-0 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-hidden overflow-y-hidden lg:overflow-y-auto"
               style={prefersReducedMotion
-                ? { opacity: 0 }
+                ? { opacity: 0, pointerEvents: isExperienceScrollActive ? "auto" : "none" }
                 : {
                     opacity: sidebarExperienceListOpacity,
                     y: sidebarExperienceListY,
-                    pointerEvents: isInExperience ? "auto" : "none",
+                    pointerEvents: isExperienceScrollActive ? "auto" : "none",
                   }
               }
             >
@@ -317,8 +318,8 @@ export const SoftwareConsole: React.FC = () => {
           <motion.div
               className="absolute inset-0 overflow-y-auto overscroll-auto p-3 sm:p-6 md:p-8 flex flex-col"
             style={prefersReducedMotion
-              ? {}
-              : { opacity: mainProjectOpacity, y: mainProjectY, pointerEvents: isInExperience ? "none" : "auto" }
+              ? { pointerEvents: isProjectScrollActive ? "auto" : "none" }
+              : { opacity: mainProjectOpacity, y: mainProjectY, pointerEvents: isProjectScrollActive ? "auto" : "none" }
             }
           >
             {/* Project role + GitHub */}
@@ -558,8 +559,8 @@ export const SoftwareConsole: React.FC = () => {
           <motion.div
             className="absolute inset-0 overflow-y-auto overscroll-auto p-3 sm:p-6 md:p-8 flex flex-col"
             style={prefersReducedMotion
-              ? { opacity: 0 }
-              : { opacity: mainExperienceOpacity, y: mainExperienceY, pointerEvents: isInExperience ? "auto" : "none" }
+              ? { opacity: 0, pointerEvents: isExperienceScrollActive ? "auto" : "none" }
+              : { opacity: mainExperienceOpacity, y: mainExperienceY, pointerEvents: isExperienceScrollActive ? "auto" : "none" }
             }
           >
             {/* Experience header */}
